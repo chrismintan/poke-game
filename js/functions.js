@@ -62,10 +62,10 @@ var setUpGame = function() {
 /*
  	Function: drawShadow
 	Makes all pixels of the image that is on the <canvas> black.
-	
+
 	Pikachu from official Pokemon site for testing
 	"https://assets.pokemon.com/assets/cms2/img/pokedex/full/025.png"
-	
+
 */
 
 var drawShadow = function() {
@@ -77,8 +77,8 @@ var drawShadow = function() {
 		shownImage = new Image();
 		shownImage.src = currentImg;
 		shownImage.setAttribute("crossorigin","Anonymous");
-		
-		// onload is used to ensure image is loaded before coloring it all black
+
+		// onload is used to ensure image has has finished loading
 		shownImage.onload = function() {
 			if ( shownImage.width <= 100 ) {
 				canvas.width = shownImage.width * 4;
@@ -87,12 +87,12 @@ var drawShadow = function() {
 				canvas.width = shownImage.width;
 				canvas.height = shownImage.height;
 			}
-			
+
 			ctx.drawImage(shownImage, 0, 0, canvas.width, canvas.height);
-			
+
 			var baseImage = ctx.getImageData(0, 0, canvas.width, canvas.height);
-			
-			
+
+
 				for (var i = 0; i < baseImage.data.length; i+=4 ) {
 	                if( baseImage.data[i+3] >= 100 ) {
 	                    baseImage.data[i] = 30;
@@ -101,7 +101,7 @@ var drawShadow = function() {
 	                    baseImage.data[i+3] = 255;
 	            };
 			};
-			           
+
 			ctx.putImageData( baseImage, 0, 0 );
 		};
 };
@@ -112,7 +112,24 @@ var revealPokemon = function() {
 	ctx.clearRect(0, 0, canvas.width, canvas.height);
 	shownImage = new Image()
 	shownImage.src = currentImg;
-	ctx.drawImage(shownImage, 0, 0, canvas.width, canvas.height);
+
+    shownImage.onload = function() {
+    if ( shownImage.width <= 100 ) {
+        canvas.width = shownImage.width * 4;
+        canvas.height = shownImage.height * 4;
+    } else {
+        canvas.width = shownImage.width;
+        canvas.height = shownImage.height;
+    }
+
+    ctx.drawImage(shownImage, 0, 0, canvas.width, canvas.height);
+
+    };
+};
+
+var clearCanvas = function() {
+    cxt = canvas.getContext("2d");
+    cxt.clearRect(0, 0, canvas.width, canvas.height);
 };
 
 
