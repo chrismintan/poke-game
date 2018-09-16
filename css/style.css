@@ -1,0 +1,41 @@
+
+/*Linking Pokemon Font*/
+@font-face {
+	font-family: "pokefont";
+	src: url("../fonts/Pokemon_GB.ttf") format("truetype");
+}
+
+.container-fluid {
+	width: 900px;
+	margin-top: 30px;
+}
+
+.headers {
+	font-size: 20px;
+}
+
+.sides {
+	margin-top: 30px;
+}
+
+#myCanvas {
+	height: 300px;
+	width: 300px;
+}
+
+#name-input {
+	width: 275px;
+}
+
+#type-input {
+	width: 150px;
+}
+
+.typing-field {
+	margin: 5px 5px;
+}
+
+#myCanvas {
+	height: 300px;
+	width: 300px;
+}

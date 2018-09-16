@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Who's That Pokemon!</title>
+	<meta charset="utf-8">
+	<link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.min.css">
+	<link rel="stylesheet" media="screen" url="https://fontlibrary.org/face/pokemon" type="text/css"/>
+	<link rel="stylesheet" type="text/css" href="css/style.css" />
+	<script src="js/functions.js"></script>
+	<script src="js/script.js"></script>
+
+</head>
+
+<body>
+
+<!-- Creating the whole table -->
+<div class="container-fluid">
+
+	<!-- Having only one row so that the blocks of text do not stack on top of each other when window is resized -->
+	<div class="row">
+
+		<!-- Creating 3 columns via bootstrap -->
+		<div class="col-3">
+
+			<!-- Difficulty box with 3 settings (easy, medium, hard) -->
+			<h2 class="headers sides">Difficuty</h2>
+				<div class="difficulty-options">Easy<button type="button" class="float-right" id="easy-button"></button></div><br>
+				<div class="difficulty-options">Medium<button type="button" class="float-right"></button></div><br>
+				<div class="difficulty-options">Hard<button type="button" class="float-right"></button></div><br>
+
+			<!-- Creating the Hint section of the game -->
+			<h2 class="headers sides">Hint?<button class="button" id="hint-button"></button></h2>
+				<a>Number of letters:</a><br>
+
+		</div>
+
+		<!-- Middle section where the actual game happens -->
+		<div class="col-6" id="game-section" align="center">
+			<h1 class="game-title" id="middle">Who's that Pokemon?</h1>
+			
+
+				<!-- Creating the picture frame where the pokemons will be displayed -->
+				<canvas id="myCanvas"></canvas>
+
+				<!-- Input field where answers are typed in -->
+				<form class="answer-area">
+					<input type="text" class="typing-field" id="name-input" placeholder="Pokemon Name..."><br>
+					<input type="text" class="typing-field" id="type-input" placeholder="Pokemon Type...">
+				</form>
+
+
+		</div>
+
+		<!-- Score section to keep score -->
+		<div class="col-3" align="center">
+
+			<!-- Forever mode score -->
+			<h2 class="headers sides">Forever Mode</h2>
+				<h3 class="headers" id="forever-current-score">Current score:</h3>
+				<h1 class="forever-scores" id="forever-current-score">27</h1>
+
+				<h3 class= "headers" id="forever-best-score">Best:</h3>
+				<h1 class= "forever-scores" id="forever-best-score">30</h1>
+
+			<!-- Timed mode score -->
+			<h2 class="headers sides">Timed Mode</h2>
+				<h3 class="headers" id="timed-current-score">Current score:</h3>
+				<h1 class="timed-scores" id="forever-current-score">27</h1>
+
+				<h3 class= "headers" id="timed-best-score">Best:</h3>
+				<h1 class= "timed-scores" id="timed-best-score">30</h1>
+
+
+		</div>
+	</div>
+</div>
+
+</body>
+
+</html>
