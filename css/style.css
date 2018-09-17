@@ -7,15 +7,28 @@
 
 .container-fluid {
 	width: 900px;
-	margin-top: 30px;
+	margin-top: 80px;
+	margin-left: 50px;
 }
 
 .headers {
-	font-size: 20px;
+	font-size: 17px;
+	white-space: nowrap;
+	text-align: center;
+	margin-left:-100%;
+	margin-right: -100%;
+	font-weight: bolder;
 }
 
 .sides {
-	margin-top: 30px;
+	margin-top: 12px;
+}
+
+.options {
+	cursor: pointer;
+	border-radius: 5px;
+	text-indent: 30px;
+	margin: 7px 0;
 }
 
 #myCanvas {
@@ -41,11 +54,74 @@
 }
 
 .forever-scores {
-	font-size: 50px;
+	font-size: 40px;
 }
 
 .timed-scores {
-	font-size: 50px;
+	font-size: 40px;
+}
+
+body {
+	background-color: #ECF51394;
+}
+
+.col-2 {
+	border: 2px solid black;
+	border-radius: 30px;
+}
+
+#game-section {
+	margin-top: -30px;
+}
+
+.selected {
+	background-color: red;
+}
+
+#hint {
+	cursor: help;
+}
+
+.pokeball {
+	height: 100px;
+	width: 100px;
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: -12px;
+}
+
+.wrap {
+	border: 2px solid #F88700FF;
+	border-radius: 20px;
+	cursor: pointer;
+}
+
+#start {
+	color: #F88700FF;
+}
+
+.progress {
+	margin: 10px;
+	text-align: center;
+	align-content: center;
+	height: 20px;
+}
+
+#progress {
+	margin: auto;
+	font-size: 12px;
+}
+
+#restart {
+	text-align: center;
+	margin-top: 10px;
+	font-size: 20px;
+	font-weight: 900;
+	border: 2px solid #FF755FFF;
+	color: #FF3E4BFF;
+	border-radius: 30px;
+	cursor: pointer;
 }
 
 
