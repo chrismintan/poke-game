@@ -6,9 +6,6 @@
 	<link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.min.css">
 	<link rel="stylesheet" media="screen" url="https://fontlibrary.org/face/pokemon" type="text/css"/>
 	<link rel="stylesheet" type="text/css" href="css/style.css" />
-	<script src="js/functions.js"></script>
-	<script src="js/script.js"></script>
-
 </head>
 
 <body>
@@ -38,13 +35,12 @@
 		<div class="col-6" id="game-section" align="center">
 			<h1 class="game-title" id="middle">Who's that Pokemon?</h1>
 
-
 				<!-- Creating the picture frame where the pokemons will be displayed -->
 				<canvas id="myCanvas"></canvas>
 
 				<!-- Input field where answers are typed in -->
 				<form class="answer-area">
-					<input type="text" class="typing-field" id="name-input" placeholder="Pokemon Name..."><br>
+					<input type="text" class="typing-field" id="name-input" placeholder="Pokemon Name..." onkeyup="nameCheck()"><br>
 					<input type="text" class="typing-field" id="type-input" placeholder="Pokemon Type...">
 				</form>
 
@@ -56,25 +52,27 @@
 
 			<!-- Forever mode score -->
 			<h2 class="headers sides">Forever Mode</h2>
-				<h3 class="headers" id="forever-current-score">Current score:</h3>
-				<h1 class="forever-scores" id="forever-current-score">27</h1>
+				<h3 class="headers" id="forever-header">Current score:</h3>
+				<h1 class="forever-scores" id="forever-current-score"></h1>
 
-				<h3 class= "headers" id="forever-best-score">Best:</h3>
-				<h1 class= "forever-scores" id="forever-best-score">30</h1>
+				<h3 class= "headers" id="forever-header">Best:</h3>
+				<h1 class= "forever-scores" id="forever-best-score"></h1>
 
 			<!-- Timed mode score -->
 			<h2 class="headers sides">Timed Mode</h2>
-				<h3 class="headers" id="timed-current-score">Current score:</h3>
-				<h1 class="timed-scores" id="forever-current-score">27</h1>
+				<h3 class="headers" id="timed-header">Current score:</h3>
+				<h1 class="timed-scores" id="timed-current-score"></h1>
 
-				<h3 class= "headers" id="timed-best-score">Best:</h3>
-				<h1 class= "timed-scores" id="timed-best-score">30</h1>
+				<h3 class= "headers" id="timed-header">Best:</h3>
+				<h1 class= "timed-scores" id="timed-best-score"></h1>
 
 
 		</div>
+
 	</div>
+
 </div>
-
+<script src="js/functions.js"></script>
+<script src="js/script.js"></script>
 </body>
-
 </html>
