@@ -7,16 +7,16 @@
 
 .container-fluid {
 	width: 900px;
-	margin-top: 80px;
-	margin-left: 50px;
+	margin: auto;
+	margin-top: 100px;
 }
 
 .headers {
 	font-size: 17px;
 	white-space: nowrap;
 	text-align: center;
-	margin-left:-100%;
-	margin-right: -100%;
+	margin-left:-20%;
+	margin-right: -20%;
 	font-weight: bolder;
 }
 
@@ -75,11 +75,7 @@ body {
 }
 
 .selected {
-	background-color: red;
-}
-
-#hint {
-	cursor: help;
+	background-color: #f2d468;
 }
 
 .pokeball {
@@ -102,15 +98,20 @@ body {
 }
 
 .progress {
-	margin: 10px;
+	margin-bottom: 7px;
+}
+
+#progress-bar {
 	text-align: center;
 	align-content: center;
-	height: 20px;
+	line-height: 20px;
 }
 
 #progress {
-	margin: auto;
-	font-size: 12px;
+	display: block;
+	width: 100%;
+	line-height: 30px;
+	font-size: 20px;
 }
 
 #restart {
@@ -122,6 +123,17 @@ body {
 	color: #FF3E4BFF;
 	border-radius: 30px;
 	cursor: pointer;
+}
+
+#skip {
+	border: 2px solid #f1a167;
+	margin-left: -10px;
+	margin-right: -10px;
+	text-align: center;
+	line-height: 20px;
+	border-radius: 25px;
+	color: #f1a167;
+	cursor: help;
 }
 
 

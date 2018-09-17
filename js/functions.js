@@ -1,3 +1,4 @@
+var poke = ["Bulbasaur","Ivysaur","Venusaur","Charmander","Charmeleon","Charizard","Squirtle","Wartortle","Blastoise","Caterpie","Metapod","Butterfree","Weedle","Kakuna","Beedrill","Pidgey","Pidgeotto","Pidgeot","Rattata","Raticate","Spearow","Fearow","Ekans","Arbok","Pikachu","Raichu","Sandshrew","Sandslash","Nidoran","Nidorina","Nidoqueen","Nidoran","Nidorino","Nidoking","Clefairy","Clefable","Vulpix","Ninetales","Jigglypuff","Wigglytuff","Zubat","Golbat","Oddish","Gloom","Vileplume","Paras","Parasect","Venonat","Venomoth","Diglett","Dugtrio","Meowth","Persian","Psyduck","Golduck","Mankey","Primeape","Growlithe","Arcanine","Poliwag","Poliwhirl","Poliwrath","Abra","Kadabra","Alakazam","Machop","Machoke","Machamp","Bellsprout","Weepinbell","Victreebel","Tentacool","Tentacruel","Geodude","Graveler","Golem","Ponyta","Rapidash","Slowpoke","Slowbro","Magnemite","Magneton","Farfetch'd","Doduo","Dodrio","Seel","Dewgong","Grimer","Muk","Shellder","Cloyster","Gastly","Haunter","Gengar","Onix","Drowzee","Hypno","Krabby","Kingler","Voltorb","Electrode","Exeggcute","Exeggutor","Cubone","Marowak","Hitmonlee","Hitmonchan","Lickitung","Koffing","Weezing","Rhyhorn","Rhydon","Chansey","Tangela","Kangaskhan","Horsea","Seadra","Goldeen","Seaking","Staryu","Starmie","Mr. Mime","Scyther","Jynx","Electabuzz","Magmar","Pinsir","Tauros","Magikarp","Gyarados","Lapras","Ditto","Eevee","Vaporeon","Jolteon","Flareon","Porygon","Omanyte","Omastar","Kabuto","Kabutops","Aerodactyl","Snorlax","Articuno","Zapdos","Moltres","Dratini","Dragonair","Dragonite","Mewtwo","Mew"];
 var currentPokeNum;
 var pastPokemons = [];
 var oneTo151 = [];
@@ -23,12 +24,29 @@ var seconds = 10;
 var turn;
 var difficulty = 2;
 var gameMode = 0;
+var pokedex = {};
+var easyArray = [];
+
+// Generate an array of all the pokemons
+for (var i = 1; i < 152; i++) {
+    oneTo151.push(i);
+    allPokemons = oneTo151;
+};
+
+// Generate a Pokedex of Pokemons corresponding to their id numbers (for speed mode)
+for( var i = 0, j = 0; i < poke.length; i++, j++ ) {
+    pokedex[allPokemons[i]] = poke[i];
+};
+
+for (var i = 0; i < shuffledPokemons.length; i++) {
+	easyArray.push(pokedex[shuffledPokemons[i]]);
+};
 
 // Setting up buttons for difficulty and game modes
 var easyButton = document.getElementById("easy");
 var mediumButton = document.getElementById("medium");
 var hardButton = document.getElementById("hard");
-var hintButton = document.getElementById("hint");
+var skipButton = document.getElementById("skip");
 var foreverButton = document.getElementById("forever");
 var timedButton = document.getElementById("timed");
 var startButton = document.getElementById("start-button");
@@ -44,7 +62,6 @@ var changeEasy = function() {
     mediumButton.classList.remove("selected");
     hardButton.classList.remove("selected");
     easyButton.classList.add("selected");
-    getPokemon();
 };
 
 var changeMedium = function() {
@@ -70,12 +87,13 @@ var foreverMode = function() {
 };
 
 var timedMode = function() {
+	gameMode = 2;
     foreverButton.classList.remove("selected");
     timedButton.classList.add("selected");
 }
 
-var giveHint = function() {
-    console.log("hint!");
+var skipWord = function() {
+    console.log("skip!");
 };
 
 // Function to remove all event listeners and cursor change
@@ -105,7 +123,7 @@ var restartGame = function() {
     imgArray = [];
     namesArray = [];
     typeArray = [];
-    seconds = 10;
+    seconds = 20;
 };
 
 var gameInit = function() {
@@ -113,8 +131,9 @@ var gameInit = function() {
     if ( gameMode == 1 ) {
         if ( difficulty == 3 ) {
             progress.textContent = "0/151";
+            rm.style.display = "block";
+            drawShadow();
         };
-
         if ( difficulty == 1 ) {
             drawShadow();
             progress.textContent = "0/151";
@@ -129,7 +148,10 @@ var gameInit = function() {
     };
     if ( gameMode == 2 ) {
         if ( difficulty == 3 ) {
-
+        	rm.style.display = "block";
+        	startTimedGame();
+        	drawShadow();
+        	progress.textContent = seconds;
         };
         if ( difficulty == 1 ) {
             drawShadow();
@@ -153,7 +175,7 @@ var setUpListeners = function() {
     hardButton.addEventListener("click", changeHard);
     foreverButton.addEventListener("click", foreverMode);
     timedButton.addEventListener("click", timedMode);
-    hintButton.addEventListener("click", giveHint);
+    skipButton.addEventListener("click", skipWord);
     startButton.addEventListener("click", gameInit);
     restartButton.addEventListener("click",restartGame);
 
@@ -172,12 +194,6 @@ var setUpListeners = function() {
     startButton.style.backgroundColor = "";
 };
 
-// Generate an array of all the pokemons
-for (var i = 1; i < 152; i++) {
-    oneTo151.push(i);
-    allPokemons = oneTo151;
-};
-
 // Progress bar manipulation for forever mode
 var updateBar = function() {
     if ( gameMode == 1 ) {
@@ -188,11 +204,17 @@ var updateBar = function() {
     };
 
     if ( gameMode == 2 ) {
-        progress.textContent = seconds;
-        percent = (seconds/10)*100;
-        progressBar.style.width = percent + "%";
+    	oneDP = parseInt(seconds) + 1;
+    	oneDP = oneDP * 20;
+    	oneDP = Math.floor(oneDP);
+    	oneDP = oneDP / 20;
+    	progress.textContent = oneDP;
+        timeLeft = parseInt(seconds);
+        percentage = (seconds/20)*100;
+        progressBar.style.width = percentage + "%";
         if ( seconds < 0 ) {
-            clearCanvas;
+            clearCanvas();
+        seconds = 20;
         };
     };
 };
@@ -221,6 +243,7 @@ var responseHandler = function() {
         } typeArray.push( tempArr );
     };
 
+    // JSON Version - was too lag to be played
     // if ( difficulty == 1 ) {
 
     //     if ( results.id > 0 && results.id <10 ) {
@@ -236,10 +259,6 @@ var responseHandler = function() {
     //     imgArray.push("https://assets.pokemon.com/assets/cms2/img/pokedex/full/" + results.id + ".png");
     //     };
     // };
-
-    if ( difficulty == 1 ) {
-        imgArray.push("https://serebii.net/art/th/" + results.id + ".png");
-    };
 
     if ( difficulty == 2 || difficulty == 3 ) {
         imgArray.push(results.sprites.front_default);
@@ -263,8 +282,7 @@ var getPokemon = function() {
     	request.open("GET", "http://pokeapi.co/api/v2/pokemon/" + shuffledPokemons[0] + "/");
     	request.send();
         // Removing Pokemons which data we already have searched for
-        shuffledPokemons.shift(1,8);
-
+        shuffledPokemons.shift(1,1);
     };
 };
 
@@ -305,17 +323,49 @@ var setUpGame = function() {
 */
 
 var drawShadow = function() {
+	if ( difficulty != 1 ) {
+		var canvas = document.getElementById("myCanvas")
+			ctx = canvas.getContext("2d");
+			shownImage = new Image();
+			shownImage.src = imgArray[0];
+			shownImage.setAttribute("crossorigin","Anonymous");
 
-	var canvas = document.getElementById("myCanvas")
+			// onload is used to ensure image has has finished loading
+			shownImage.onload = function() {
+	    			if ( shownImage.width <= 100 ) {
+	    				canvas.width = shownImage.width * 4;
+	    				canvas.height = shownImage.height * 4;
+	    			} else {
+	    				canvas.width = shownImage.width;
+	    				canvas.height = shownImage.height;
+	    			};
+	           
+				ctx.drawImage(shownImage, 0, 0, canvas.width, canvas.height);
+
+				var baseImage = ctx.getImageData(0, 0, canvas.width, canvas.height);
+
+				for (var i = 0; i < baseImage.data.length; i+=4 ) {
+		            if( baseImage.data[i+3] >= 100 ) {
+		                baseImage.data[i] = 30;
+		                baseImage.data[i+1] = 30;
+		                baseImage.data[i+2] = 30;
+		                baseImage.data[i+3] = 255;
+		        };
+			};
+			ctx.putImageData( baseImage, 0, 0 );
+		};
+	};
+
+	// Local images don't work
+	if ( difficulty == 1 ) {
+		var canvas = document.getElementById("myCanvas")
 		ctx = canvas.getContext("2d");
 		shownImage = new Image();
-		shownImage.src = imgArray[0];
-		shownImage.setAttribute("crossorigin","Anonymous");
+		shownImage.src = "sprites/" + shuffledPokemons[0] + ".png";
+		shownImage.setAttribute("origin","null");
 
 		// onload is used to ensure image has has finished loading
 		shownImage.onload = function() {
-            if ( difficulty != 1 ) {
-
     			if ( shownImage.width <= 100 ) {
     				canvas.width = shownImage.width * 4;
     				canvas.height = shownImage.height * 4;
@@ -323,45 +373,61 @@ var drawShadow = function() {
     				canvas.width = shownImage.width;
     				canvas.height = shownImage.height;
     			};
-            };
-
+           	
 			ctx.drawImage(shownImage, 0, 0, canvas.width, canvas.height);
-
-			var baseImage = ctx.getImageData(0, 0, canvas.width, canvas.height);
-
-
-				for (var i = 0; i < baseImage.data.length; i+=4 ) {
-	                if( baseImage.data[i+3] >= 100 ) {
-	                    baseImage.data[i] = 30;
-	                    baseImage.data[i+1] = 30;
-	                    baseImage.data[i+2] = 30;
-	                    baseImage.data[i+3] = 255;
-	            };
-			};
-
-			ctx.putImageData( baseImage, 0, 0 );
 		};
+			// var baseImage = ctx.getImageData(0, 0, canvas.width, canvas.height);
+
+			// for (var i = 0; i < baseImage.data.length; i+=4 ) {
+	  //           if( baseImage.data[i+3] >= 100 ) {
+	  //               baseImage.data[i] = 30;
+	  //               baseImage.data[i+1] = 30;
+	  //               baseImage.data[i+2] = 30;
+	  //               baseImage.data[i+3] = 255;
+	  //       };
+		// };
+		// ctx.putImageData( baseImage, 0, 0 );
+	}; 
 };
 
+
 var revealPokemon = function() {
-	var canvas = document.getElementById("myCanvas");
-	ctx = canvas.getContext("2d");
-	ctx.clearRect(0, 0, canvas.width, canvas.height);
-	shownImage = new Image();
-	shownImage.src = imgArray[0];
+	if ( difficulty != 1 ) {	
+		var canvas = document.getElementById("myCanvas");
+		ctx = canvas.getContext("2d");
+		ctx.clearRect(0, 0, canvas.width, canvas.height);
+		shownImage = new Image();
+		shownImage.src = imgArray[0];
 
-    shownImage.onload = function() {
-    if ( shownImage.width <= 100 ) {
-        canvas.width = shownImage.width * 4;
-        canvas.height = shownImage.height * 4;
-    } else {
-        canvas.width = shownImage.width;
-        canvas.height = shownImage.height;
-    }
+	    shownImage.onload = function() {
+	    if ( shownImage.width <= 100 ) {
+	        canvas.width = shownImage.width * 4;
+	        canvas.height = shownImage.height * 4;
+	    } else {
+	        canvas.width = shownImage.width;
+	        canvas.height = shownImage.height;
+	    }
+	    ctx.drawImage(shownImage, 0, 0, canvas.width, canvas.height);
+	    };
+	};
+	if ( difficulty == 1 ) {
+		var canvas = document.getElementById("myCanvas");
+		ctx = canvas.getContext("2d");
+		ctx.clearRect(0, 0, canvas.width, canvas.height);
+		shownImage = new Image();
+		shownImage.src = "sprites/"+shuffledPokemons[0]+".png";
 
-    ctx.drawImage(shownImage, 0, 0, canvas.width, canvas.height);
-
-    };
+	    shownImage.onload = function() {
+	    if ( shownImage.width <= 100 ) {
+	        canvas.width = shownImage.width * 4;
+	        canvas.height = shownImage.height * 4;
+	    } else {
+	        canvas.width = shownImage.width;
+	        canvas.height = shownImage.height;
+	    }
+	    ctx.drawImage(shownImage, 0, 0, canvas.width, canvas.height);
+	    };
+	};
 };
 
 var clearCanvas = function() {
@@ -380,23 +446,30 @@ var clearAndDraw = function() {
     clearInputFields();
 };
 
+
+var wtf;
 // Function for checking the name of the Pokemon
 var nameCheck = function() {
 
-    if ( difficulty == 1 || difficulty == 2 ){
+    if ( difficulty == 2 ) {
 
         if ( document.getElementById("name-input").value == namesArray[0] ) {
             revealPokemon();
 
             // Add difficulty conditions here
-            currentForeverScore++
-            if ( currentForeverScore > bestForeverScore ) {
-                bestForeverScore = currentForeverScore;
-            };
+            if ( gameMode == 1 ) {
+	            currentForeverScore++
+	            if ( currentForeverScore > bestForeverScore ) {
+	                bestForeverScore = currentForeverScore;
+	            };
+	        };
 
-            if ( currentTimedScore > bestTimedScore ) {
-                bestTimedScore = currentTimedScore;
-            };
+	        if ( gameMode == 2 ) {
+	        	currentTimedScore++
+	            if ( currentTimedScore > bestTimedScore ) {
+	                bestTimedScore = currentTimedScore;
+	            };
+	        };
 
             update();
             imgArray.shift(1,1);
@@ -416,14 +489,19 @@ var nameCheck = function() {
     if ( difficulty == 3 ) {
         if ( document.getElementById("name-input").value == namesArray[0] && typeArray[0].includes(document.getElementById("type-input").value)) {
             revealPokemon();
-            currentForeverScore++
-            if ( currentForeverScore > bestForeverScore ) {
-                bestForeverScore = currentForeverScore;
-            };
+	        if ( gameMode == 1 ) {    
+	            currentForeverScore++
+	            if ( currentForeverScore > bestForeverScore ) {
+	                bestForeverScore = currentForeverScore;
+	            };
+	        };
+	        if ( gameMode == 2 ) {
+	        	currentTimedScore++
+	            if ( currentTimedScore > bestTimedScore ) {
+	                bestTimedScore = currentTimedScore;
+	            };
+	        };
 
-            if ( currentTimedScore > bestTimedScore ) {
-                bestTimedScore = currentTimedScore;
-            };
             update();
             imgArray.shift(1,1);
             namesArray.shift(1,1);
@@ -435,22 +513,52 @@ var nameCheck = function() {
             setTimeout(clearAndDraw, 1000);
         };
     };
+    if ( difficulty == 1 ) {
+    	var wtf = shuffledPokemons[0];
+    	    if ( Boolean( document.getElementById("name-input").value.toLowerCase() == pokedex[shuffledPokemons[0]].toLowerCase() )  == true ) {
+            revealPokemon();
+
+	            // Add difficulty conditions here
+	            if ( gameMode == 1 ) {
+		            currentForeverScore++
+		            if ( currentForeverScore > bestForeverScore ) {
+		                bestForeverScore = currentForeverScore;
+		            };
+		        };
+
+		        if ( gameMode == 2 ) {
+		        	currentTimedScore++
+		            if ( currentTimedScore > bestTimedScore ) {
+		                bestTimedScore = currentTimedScore;
+		            };
+		        };
+
+	            update();
+	            shuffledPokemons.shift(1,1);
+
+	            // if ( imgArray.length < 4 ) {
+	            //     getPokemon();
+	            // };
+            setTimeout(clearAndDraw, 1000);
+	        };
+	};
 };
 
-var seconds = 10;
+var seconds = 20;
 
 var timeoutID;
 
 var timeMode = function() {
-    seconds = seconds - 0.01;
+    seconds = seconds - 0.05;
+    updateBar();
     if ( seconds < 0 ) {
         clearTimeout(timeoutID);
+        progress.textContent = "Your Score: " + currentTimedScore;
     };
-    updateBar();
 };
 
 var startTimedGame = function() {
-    timeoutID = setInterval(timeMode, 10);
+    timeoutID = setInterval(timeMode, 50);
 };
 
 var stopTime = function() {
