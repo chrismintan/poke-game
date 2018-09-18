@@ -369,7 +369,7 @@ var shuffle = function() {
     shuffledPokemons = [];
 	for (var i = 151; i > 0; i--) {
 		rNum = Math.floor( Math.random()*i );
-		shuffledPokemons.push(rNum);
+		shuffledPokemons.push(oneTo151[rNum]);
 	} console.log(shuffledPokemons);
 };
 
@@ -431,15 +431,14 @@ var drawShadow = function() {
 
 			// onload is used to ensure image has has finished loading
 			shownImage.onload = function() {
-// If dealing with small images, use below to make them bigger
-// if ( shownImage.width <= 100 ) {
-// 	canvas.width = shownImage.width * 4;
-// 	canvas.height = shownImage.height * 4;
-// } else {
-// 	canvas.width = shownImage.width;
-// 	canvas.height = shownImage.height;
-// };
-
+            // If dealing with small images, use below to make them bigger
+            // if ( shownImage.width <= 100 ) {
+            // 	canvas.width = shownImage.width * 4;
+            // 	canvas.height = shownImage.height * 4;
+            // } else {
+            // 	canvas.width = shownImage.width;
+            // 	canvas.height = shownImage.height;
+            // };
 				ctx.drawImage(shownImage, 0, 0, canvas.width, canvas.height);
 
 				var baseImage = ctx.getImageData(0, 0, canvas.width, canvas.height);
@@ -462,7 +461,7 @@ var drawShadow = function() {
 		ctx = canvas.getContext("2d");
 		shownImage = new Image();
 		shownImage.src = "sprites/" + shuffledPokemons[0] + ".png";
-		shownImage.setAttribute("origin","null");
+		shownImage.setAttribute("origin","Anonymous");
 
 		// onload is used to ensure image has has finished loading
 		shownImage.onload = function() {
