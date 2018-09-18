@@ -20,12 +20,13 @@ var canvas = document.getElementById("myCanvas");
 var namesArray = [];
 var imgArray = [];
 var typeArray = [];
-var seconds = 10;
+var seconds = 60;
 var turn;
 var difficulty = 2;
 var gameMode = 0;
 var pokedex = {};
 var easyArray = [];
+var skip = 0;
 
 // Generate an array of all the pokemons
 for (var i = 1; i < 152; i++) {
@@ -92,8 +93,63 @@ var timedMode = function() {
     timedButton.classList.add("selected");
 }
 
-var skipWord = function() {
-    console.log("skip!");
+var skipMode = function() {
+    skip = 1;
+    if ( difficulty == 2 )  {
+        document.getElementById("name-input").value = namesArray[0];
+        nameCheck();
+
+        if ( gameMode == 1 ) {
+            currentForeverScore--
+        };
+
+        if ( gameMode == 2 ) {
+            currentTimedScore--
+        };
+
+        update();
+        imgArray.shift(1,1);
+        namesArray.shift(1,1);
+        typeArray.shift(1,1);
+        setTimeout(clearAndDraw, 1000);
+    };
+
+    if ( difficulty == 3 ) {
+        document.getElementById("name-input").value = namesArray[0];
+        document.getElementById("type-input").value = typeArray[0];
+        nameCheck();
+
+        if ( gameMode == 1 ) {
+            currentForeverScore--
+        };
+
+        if ( gameMode == 2 ) {
+            currentTimedScore--
+        };
+
+        update();
+        imgArray.shift(1,1);
+        namesArray.shift(1,1);
+        typeArray.shift(1,1);
+        setTimeout(clearAndDraw, 1000);
+    };
+
+    if ( difficulty == 1 ) {
+        document.getElementById("name-input").value = pokedex[shuffledPokemons[0]];
+        nameCheck();
+
+        if ( gameMode == 1 ) {
+            currentForeverScore--
+        };
+
+        if ( gameMode == 2 ) {
+            currentTimedScore--
+        };
+        update();
+        shuffledPokemons.shift(1,1);
+        setTimeout(clearAndDraw, 1000);
+    };
+skip = 0;
 };
 
 // Function to remove all event listeners and cursor change
@@ -123,32 +179,37 @@ var restartGame = function() {
     imgArray = [];
     namesArray = [];
     typeArray = [];
-    seconds = 20;
+    seconds = 60;
 };
 
 var gameInit = function() {
     rm = document.getElementById("type-input");
+    nmbar = document.getElementById("name-input");
     if ( gameMode == 1 ) {
         if ( difficulty == 3 ) {
             progress.textContent = "0/151";
             rm.style.display = "block";
+            nmbar.style.display = "block";
             drawShadow();
         };
         if ( difficulty == 1 ) {
             drawShadow();
             progress.textContent = "0/151";
             rm.style.display = "none";
+            nmbar.style.display = "block";
         };
         if ( difficulty == 2 ) {
             drawShadow();
             progress.textContent = "0/151";
             rm.style.display = "none";
+            nmbar.style.display = "block";
         };
         removeAllListeners();
     };
     if ( gameMode == 2 ) {
         if ( difficulty == 3 ) {
         	rm.style.display = "block";
+            nmbar.style.display = "block";
         	startTimedGame();
         	drawShadow();
         	progress.textContent = seconds;
@@ -158,12 +219,14 @@ var gameInit = function() {
             progress.textContent = seconds;
             startTimedGame();
             rm.style.display = "none";
+            nmbar.style.display = "block";
         };
         if ( difficulty == 2 ) {
             drawShadow()
             progress.textContent = seconds;
             startTimedGame();
             rm.style.display = "none";
+            nmbar.style.display = "block";
         };
     };
 };
@@ -175,7 +238,7 @@ var setUpListeners = function() {
     hardButton.addEventListener("click", changeHard);
     foreverButton.addEventListener("click", foreverMode);
     timedButton.addEventListener("click", timedMode);
-    skipButton.addEventListener("click", skipWord);
+    skipButton.addEventListener("click", skipMode);
     startButton.addEventListener("click", gameInit);
     restartButton.addEventListener("click",restartGame);
 
@@ -205,16 +268,15 @@ var updateBar = function() {
 
     if ( gameMode == 2 ) {
     	oneDP = parseInt(seconds) + 1;
-    	oneDP = oneDP * 20;
+    	oneDP = oneDP * 60;
     	oneDP = Math.floor(oneDP);
-    	oneDP = oneDP / 20;
+    	oneDP = oneDP / 60;
     	progress.textContent = oneDP;
         timeLeft = parseInt(seconds);
-        percentage = (seconds/20)*100;
+        percentage = (seconds/60)*100;
         progressBar.style.width = percentage + "%";
         if ( seconds < 0 ) {
             clearCanvas();
-        seconds = 20;
         };
     };
 };
@@ -232,15 +294,20 @@ var update = function() {
 var responseHandler = function() {
 	results = JSON.parse(this.responseText);
 	console.log(results);
-    namesArray.push(results.name);
+
+    if ( results.name != undefined ) {
+        namesArray.push(results.name);
+    };
 
     tempArr = [];
-    if ( results.types.length < 2) {
-        typeArray.push( [results.types[0].type.name] );
-    } else if ( results.types.length > 1 ) {
-        for ( var i = 0; i < 2; i++ ) {
-            tempArr.push( results.types[i].type.name );
-        } typeArray.push( tempArr );
+    if ( results.types != undefined ){
+        if ( results.types.length < 2) {
+            typeArray.push( [results.types[0].type.name] );
+        } else if ( results.types.length > 1 ) {
+            for ( var i = 0; i < 2; i++ ) {
+                tempArr.push( results.types[i].type.name );
+            } typeArray.push( tempArr );
+        };
     };
 
     // JSON Version - was too lag to be played
@@ -261,7 +328,9 @@ var responseHandler = function() {
     // };
 
     if ( difficulty == 2 || difficulty == 3 ) {
-        imgArray.push(results.sprites.front_default);
+        if ( results.sprites.front_default != undefined ){
+            imgArray.push(results.sprites.front_default);
+        };
     };
 };
 
@@ -332,14 +401,15 @@ var drawShadow = function() {
 
 			// onload is used to ensure image has has finished loading
 			shownImage.onload = function() {
-	    			if ( shownImage.width <= 100 ) {
-	    				canvas.width = shownImage.width * 4;
-	    				canvas.height = shownImage.height * 4;
-	    			} else {
-	    				canvas.width = shownImage.width;
-	    				canvas.height = shownImage.height;
-	    			};
-	           
+// If dealing with small images, use below to make them bigger
+// if ( shownImage.width <= 100 ) {
+// 	canvas.width = shownImage.width * 4;
+// 	canvas.height = shownImage.height * 4;
+// } else {
+// 	canvas.width = shownImage.width;
+// 	canvas.height = shownImage.height;
+// };
+
 				ctx.drawImage(shownImage, 0, 0, canvas.width, canvas.height);
 
 				var baseImage = ctx.getImageData(0, 0, canvas.width, canvas.height);
@@ -350,11 +420,11 @@ var drawShadow = function() {
 		                baseImage.data[i+1] = 30;
 		                baseImage.data[i+2] = 30;
 		                baseImage.data[i+3] = 255;
-		        };
-			};
-			ctx.putImageData( baseImage, 0, 0 );
-		};
-	};
+                    };
+                };
+                ctx.putImageData( baseImage, 0, 0 );
+    	};
+    };
 
 	// Local images don't work
 	if ( difficulty == 1 ) {
@@ -373,7 +443,7 @@ var drawShadow = function() {
     				canvas.width = shownImage.width;
     				canvas.height = shownImage.height;
     			};
-           	
+
 			ctx.drawImage(shownImage, 0, 0, canvas.width, canvas.height);
 		};
 			// var baseImage = ctx.getImageData(0, 0, canvas.width, canvas.height);
@@ -384,15 +454,15 @@ var drawShadow = function() {
 	  //               baseImage.data[i+1] = 30;
 	  //               baseImage.data[i+2] = 30;
 	  //               baseImage.data[i+3] = 255;
-	  //       };
-		// };
-		// ctx.putImageData( baseImage, 0, 0 );
-	}; 
+   //  	        };
+   //  		};
+   //  		ctx.putImageData( baseImage, 0, 0 );
+	};
 };
 
 
 var revealPokemon = function() {
-	if ( difficulty != 1 ) {	
+	if ( difficulty != 1 ) {
 		var canvas = document.getElementById("myCanvas");
 		ctx = canvas.getContext("2d");
 		ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -459,14 +529,14 @@ var nameCheck = function() {
             // Add difficulty conditions here
             if ( gameMode == 1 ) {
 	            currentForeverScore++
-	            if ( currentForeverScore > bestForeverScore ) {
+	            if ( currentForeverScore > bestForeverScore && skip == 0 ) {
 	                bestForeverScore = currentForeverScore;
 	            };
 	        };
 
 	        if ( gameMode == 2 ) {
 	        	currentTimedScore++
-	            if ( currentTimedScore > bestTimedScore ) {
+	            if ( currentTimedScore > bestTimedScore && skip == 0 ) {
 	                bestTimedScore = currentTimedScore;
 	            };
 	        };
@@ -489,15 +559,15 @@ var nameCheck = function() {
     if ( difficulty == 3 ) {
         if ( document.getElementById("name-input").value == namesArray[0] && typeArray[0].includes(document.getElementById("type-input").value)) {
             revealPokemon();
-	        if ( gameMode == 1 ) {    
+	        if ( gameMode == 1 ) {
 	            currentForeverScore++
-	            if ( currentForeverScore > bestForeverScore ) {
+	            if ( currentForeverScore > bestForeverScore && skip == 0 ) {
 	                bestForeverScore = currentForeverScore;
 	            };
 	        };
 	        if ( gameMode == 2 ) {
 	        	currentTimedScore++
-	            if ( currentTimedScore > bestTimedScore ) {
+	            if ( currentTimedScore > bestTimedScore && skip == 0 ) {
 	                bestTimedScore = currentTimedScore;
 	            };
 	        };
@@ -521,14 +591,14 @@ var nameCheck = function() {
 	            // Add difficulty conditions here
 	            if ( gameMode == 1 ) {
 		            currentForeverScore++
-		            if ( currentForeverScore > bestForeverScore ) {
+		            if ( currentForeverScore > bestForeverScore && skip == 0 ) {
 		                bestForeverScore = currentForeverScore;
 		            };
 		        };
 
 		        if ( gameMode == 2 ) {
 		        	currentTimedScore++
-		            if ( currentTimedScore > bestTimedScore ) {
+		            if ( currentTimedScore > bestTimedScore && skip == 0 ) {
 		                bestTimedScore = currentTimedScore;
 		            };
 		        };
@@ -544,15 +614,25 @@ var nameCheck = function() {
 	};
 };
 
-var seconds = 20;
+var gameEnd = function() {
+    clearCanvas();
+    clearInputFields();
+};
+
+var seconds = 60;
 
 var timeoutID;
 
 var timeMode = function() {
+    rm = document.getElementById("type-input");
+    nmbar = document.getElementById("name-input");
     seconds = seconds - 0.05;
     updateBar();
     if ( seconds < 0 ) {
+        gameEnd();
         clearTimeout(timeoutID);
+        nmbar.style.display = "none";
+        rm.style.display = "none";
         progress.textContent = "Your Score: " + currentTimedScore;
     };
 };
