@@ -195,6 +195,10 @@ var restartGame = function() {
         gameMode = 0;
         difficulty = 0;
         restart = 0;
+        for (var i = 1; i < 152; i++) {
+            oneTo151.push(i);
+            allPokemons = oneTo151;
+        };
     };
 };
 
