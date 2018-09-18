@@ -367,9 +367,10 @@ var responseHandler = function() {
 // Shuffling the order of Pokemons being shown
 var shuffle = function() {
     shuffledPokemons = [];
-	for (var i = 151; i > 0; i--) {
+	for (var i = 150; i > -1; i--) {
 		rNum = Math.floor( Math.random()*i );
 		shuffledPokemons.push(oneTo151[rNum]);
+        oneTo151.splice(rNum,1);
 	} console.log(shuffledPokemons);
 };
 
@@ -461,7 +462,7 @@ var drawShadow = function() {
 		ctx = canvas.getContext("2d");
 		shownImage = new Image();
 		shownImage.src = "sprites/" + shuffledPokemons[0] + ".png";
-		shownImage.setAttribute("origin","Anonymous");
+		shownImage.setAttribute("crossorigin","Anonymous");
 
 		// onload is used to ensure image has has finished loading
 		shownImage.onload = function() {
