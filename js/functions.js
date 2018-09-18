@@ -22,7 +22,7 @@ var imgArray = [];
 var typeArray = [];
 var seconds = 60;
 var turn;
-var difficulty = 2;
+var difficulty = 0;
 var gameMode = 0;
 var pokedex = {};
 var easyArray = [];
@@ -149,7 +149,15 @@ var skipMode = function() {
         shuffledPokemons.shift(1,1);
         setTimeout(clearAndDraw, 1000);
     };
-skip = 0;
+    skip = 0;
+};
+
+var three21 = 4;
+var countingDown = 4;
+
+var threeToOne = function() {
+    document.getElementById("progress").textContent = three21;
+    three21--
 };
 
 // Function to remove all event listeners and cursor change
@@ -157,7 +165,7 @@ var removeAllListeners = function() {
     easyButton.removeEventListener("click", changeEasy);
     mediumButton.removeEventListener("click", changeMedium);
     hardButton.removeEventListener("click", changeHard);
-    startButton.removeEventListener("click", gameInit);
+    startButton.removeEventListener("click", gameDelay);
 
     easyButton.style.cursor = "default";
     mediumButton.style.cursor = "default";
@@ -180,6 +188,9 @@ var restartGame = function() {
     namesArray = [];
     typeArray = [];
     seconds = 60;
+    three21 = 4;
+    gameMode = 0;
+    difficulty = 0;
 };
 
 var gameInit = function() {
@@ -231,6 +242,17 @@ var gameInit = function() {
     };
 };
 
+// Delaying gameInit due to wait for JSON data. 3 secs should be fiune
+var gameDelay = function() {
+    if ( gameMode != 0 && gameMode != 0 ){
+        setTimeout(gameInit, 4100);
+        setTimeout(threeToOne, 1000);
+        setTimeout(threeToOne, 2000);
+        setTimeout(threeToOne, 3000);
+        setTimeout(threeToOne, 4000);
+    };
+};
+
 // Adding event listeners to the difficulty selectors
 var setUpListeners = function() {
     easyButton.addEventListener("click", changeEasy);
@@ -239,7 +261,7 @@ var setUpListeners = function() {
     foreverButton.addEventListener("click", foreverMode);
     timedButton.addEventListener("click", timedMode);
     skipButton.addEventListener("click", skipMode);
-    startButton.addEventListener("click", gameInit);
+    startButton.addEventListener("click", gameDelay);
     restartButton.addEventListener("click",restartGame);
 
     easyButton.style.cursor = "pointer";
@@ -518,7 +540,7 @@ var clearAndDraw = function() {
 
 
 var wtf;
-// Function for checking the name of the Pokemon
+// Function  for checking the name of the Pokemon
 var nameCheck = function() {
 
     if ( difficulty == 2 ) {
@@ -644,6 +666,8 @@ var startTimedGame = function() {
 var stopTime = function() {
     clearTimeout(timeoutID);
 };
+
+
 
 setUpListeners();
 update();
