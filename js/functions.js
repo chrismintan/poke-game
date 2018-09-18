@@ -27,6 +27,8 @@ var gameMode = 0;
 var pokedex = {};
 var easyArray = [];
 var skip = 0;
+var restart = 0;
+
 
 // Generate an array of all the pokemons
 for (var i = 1; i < 152; i++) {
@@ -176,21 +178,24 @@ var removeAllListeners = function() {
 };
 
 var restartGame = function() {
-    clearCanvas();
-    currentForeverScore = 0;
-    currentTimedScore = 0;
-    progress.textContent = "";
-    setUpListeners();
-    update();
-    shuffle();
-    updateBar();
-    imgArray = [];
-    namesArray = [];
-    typeArray = [];
-    seconds = 60;
-    three21 = 4;
-    gameMode = 0;
-    difficulty = 0;
+    if ( restart == 1 ) {
+        clearCanvas();
+        currentForeverScore = 0;
+        currentTimedScore = 0;
+        progress.textContent = "";
+        setUpListeners();
+        update();
+        shuffle();
+        updateBar();
+        imgArray = [];
+        namesArray = [];
+        typeArray = [];
+        seconds = 60;
+        three21 = 4;
+        gameMode = 0;
+        difficulty = 0;
+        restart = 0;
+    };
 };
 
 var gameInit = function() {
@@ -244,12 +249,15 @@ var gameInit = function() {
 
 // Delaying gameInit due to wait for JSON data. 3 secs should be fiune
 var gameDelay = function() {
-    if ( gameMode != 0 && gameMode != 0 ){
-        setTimeout(gameInit, 4100);
-        setTimeout(threeToOne, 1000);
-        setTimeout(threeToOne, 2000);
-        setTimeout(threeToOne, 3000);
-        setTimeout(threeToOne, 4000);
+    if ( restart == 0 ) {
+        if ( gameMode != 0 && gameMode != 0 ){
+            setTimeout(gameInit, 4100);
+            setTimeout(threeToOne, 1000);
+            setTimeout(threeToOne, 2000);
+            setTimeout(threeToOne, 3000);
+            setTimeout(threeToOne, 4000);
+            restart = 1;
+        };
     };
 };
 
@@ -370,7 +378,7 @@ var getPokemon = function() {
     for ( var i = 0; i < 8; i++ ) {
         var request = new XMLHttpRequest();
         request.addEventListener("load", responseHandler);
-    	request.open("GET", "http://pokeapi.co/api/v2/pokemon/" + shuffledPokemons[0] + "/");
+    	request.open("GET", "https://pokeapi.co/api/v2/pokemon/" + shuffledPokemons[0] + "/");
     	request.send();
         // Removing Pokemons which data we already have searched for
         shuffledPokemons.shift(1,1);
