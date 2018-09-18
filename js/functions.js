@@ -425,34 +425,33 @@ var setUpGame = function() {
 var drawShadow = function() {
 	if ( difficulty != 1 ) {
 		var canvas = document.getElementById("myCanvas")
-			ctx = canvas.getContext("2d");
-			shownImage = new Image();
-			shownImage.src = imgArray[0];
-			shownImage.setAttribute("crossorigin","Anonymous");
+		ctx = canvas.getContext("2d");
+		shownImage = new Image();
+		shownImage.src = imgArray[0];
+		shownImage.setAttribute("crossorigin","Anonymous");
 
-			// onload is used to ensure image has has finished loading
-			shownImage.onload = function() {
-            // If dealing with small images, use below to make them bigger
-            // if ( shownImage.width <= 100 ) {
-            // 	canvas.width = shownImage.width * 4;
-            // 	canvas.height = shownImage.height * 4;
-            // } else {
-            // 	canvas.width = shownImage.width;
-            // 	canvas.height = shownImage.height;
-            // };
-				ctx.drawImage(shownImage, 0, 0, canvas.width, canvas.height);
+		// onload is used to ensure image has has finished loading
+		shownImage.onload = function() {
+        // If dealing with small images, use below to make them bigger
+        // if ( shownImage.width <= 100 ) {
+        // 	canvas.width = shownImage.width * 4;
+        // 	canvas.height = shownImage.height * 4;
+        // } else {
+        // 	canvas.width = shownImage.width;
+        // 	canvas.height = shownImage.height;
+        // };
 
-				var baseImage = ctx.getImageData(0, 0, canvas.width, canvas.height);
-
-				for (var i = 0; i < baseImage.data.length; i+=4 ) {
-		            if( baseImage.data[i+3] >= 100 ) {
-		                baseImage.data[i] = 30;
-		                baseImage.data[i+1] = 30;
-		                baseImage.data[i+2] = 30;
-		                baseImage.data[i+3] = 255;
-                    };
+			ctx.drawImage(shownImage, 0, 0, canvas.width, canvas.height);
+			var baseImage = ctx.getImageData(0, 0, canvas.width, canvas.height);
+			for (var i = 0; i < baseImage.data.length; i+=4 ) {
+	            if( baseImage.data[i+3] >= 100 ) {
+	                baseImage.data[i] = 30;
+	                baseImage.data[i+1] = 30;
+	                baseImage.data[i+2] = 30;
+	                baseImage.data[i+3] = 255;
                 };
-                ctx.putImageData( baseImage, 0, 0 );
+            };
+            ctx.putImageData( baseImage, 0, 0 );
     	};
     };
 
@@ -462,31 +461,30 @@ var drawShadow = function() {
 		ctx = canvas.getContext("2d");
 		shownImage = new Image();
 		shownImage.src = "sprites/" + shuffledPokemons[0] + ".png";
-		shownImage.setAttribute("crossorigin","Anonymous");
+		// shownImage.setAttribute("crossorigin","Anonymous");
 
 		// onload is used to ensure image has has finished loading
 		shownImage.onload = function() {
-    			if ( shownImage.width <= 100 ) {
-    				canvas.width = shownImage.width * 4;
-    				canvas.height = shownImage.height * 4;
-    			} else {
-    				canvas.width = shownImage.width;
-    				canvas.height = shownImage.height;
-    			};
+    			// if ( shownImage.width <= 100 ) {
+    			// 	canvas.width = shownImage.width * 4;
+    			// 	canvas.height = shownImage.height * 4;
+    			// } else {
+    			// 	canvas.width = shownImage.width;
+    			// 	canvas.height = shownImage.height;
+    			// };
 
 			ctx.drawImage(shownImage, 0, 0, canvas.width, canvas.height);
-		};
-			// var baseImage = ctx.getImageData(0, 0, canvas.width, canvas.height);
-
-			// for (var i = 0; i < baseImage.data.length; i+=4 ) {
-	  //           if( baseImage.data[i+3] >= 100 ) {
-	  //               baseImage.data[i] = 30;
-	  //               baseImage.data[i+1] = 30;
-	  //               baseImage.data[i+2] = 30;
-	  //               baseImage.data[i+3] = 255;
-   //  	        };
-   //  		};
-   //  		ctx.putImageData( baseImage, 0, 0 );
+			var baseImage = ctx.getImageData(0, 0, canvas.width, canvas.height);
+			for (var i = 0; i < baseImage.data.length; i+=4 ) {
+	            if( baseImage.data[i+3] >= 100 ) {
+	                baseImage.data[i] = 30;
+	                baseImage.data[i+1] = 30;
+	                baseImage.data[i+2] = 30;
+	                baseImage.data[i+3] = 255;
+    	        };
+    		};
+    		ctx.putImageData( baseImage, 0, 0 );
+        };
 	};
 };
 
