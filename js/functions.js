@@ -179,6 +179,10 @@ var removeAllListeners = function() {
 
 var restartGame = function() {
     if ( restart == 1 ) {
+        for (var i = 1; i < 152; i++) {
+            oneTo151.push(i);
+            allPokemons = oneTo151;
+        };
         clearCanvas();
         currentForeverScore = 0;
         currentTimedScore = 0;
@@ -195,10 +199,7 @@ var restartGame = function() {
         gameMode = 0;
         difficulty = 0;
         restart = 0;
-        for (var i = 1; i < 152; i++) {
-            oneTo151.push(i);
-            allPokemons = oneTo151;
-        };
+
     };
 };
 
