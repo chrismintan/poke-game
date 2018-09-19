@@ -471,7 +471,7 @@ var drawShadow = function() {
 		var canvas = document.getElementById("myCanvas")
 		ctx = canvas.getContext("2d");
 		shownImage = new Image();
-		shownImage.src = "sprites/" + shuffledPokemons[0] + ".png";
+		shownImage.src = "new-sprites/" + shuffledPokemons[0] + ".png";
 		// shownImage.setAttribute("crossorigin","Anonymous");
 
 		// onload is used to ensure image has has finished loading
@@ -524,7 +524,7 @@ var revealPokemon = function() {
 		ctx = canvas.getContext("2d");
 		ctx.clearRect(0, 0, canvas.width, canvas.height);
 		shownImage = new Image();
-		shownImage.src = "sprites/"+shuffledPokemons[0]+".png";
+		shownImage.src = "new-sprites/"+shuffledPokemons[0]+".png";
 
 	    shownImage.onload = function() {
 	    if ( shownImage.width <= 100 ) {
