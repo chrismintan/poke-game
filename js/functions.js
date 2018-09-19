@@ -30,6 +30,12 @@ var easyArray = [];
 var skip = 0;
 var restart = 0;
 var sound = 0;
+var skipCounter = 0;
+var wordsArray = [];
+var currentKeys = [];
+var intervalID;
+var bottom = document.getElementById("blinker1");
+var mid = document.getElementsByClassName("middle")[0];
 
 var addSound = function(src) {
     if ( sound != 1 ) {
@@ -113,10 +119,9 @@ var timedMode = function() {
 
 var skipMode = function() {
     skip = 1;
+    skipCounter++
     if ( difficulty == 2 )  {
         document.getElementById("name-input").value = namesArray[0];
-        nameCheck();
-
         if ( gameMode == 1 ) {
             currentForeverScore--
         };
@@ -124,38 +129,24 @@ var skipMode = function() {
         if ( gameMode == 2 ) {
             currentTimedScore--
         };
-
-        update();
-        imgArray.shift(1,1);
-        namesArray.shift(1,1);
-        typeArray.shift(1,1);
-        setTimeout(clearAndDraw, 1000);
+        nameCheck();
     };
 
     if ( difficulty == 3 ) {
         document.getElementById("name-input").value = namesArray[0];
         document.getElementById("type-input").value = typeArray[0];
-        nameCheck();
-
-        if ( gameMode == 1 ) {
+        if ( gameMode == 1  ) {
             currentForeverScore--
         };
 
         if ( gameMode == 2 ) {
             currentTimedScore--
         };
-
-        update();
-        imgArray.shift(1,1);
-        namesArray.shift(1,1);
-        typeArray.shift(1,1);
-        setTimeout(clearAndDraw, 1000);
+        nameCheck();
     };
 
     if ( difficulty == 1 ) {
         document.getElementById("name-input").value = pokedex[shuffledPokemons[0]];
-        nameCheck();
-
         if ( gameMode == 1 ) {
             currentForeverScore--
         };
@@ -163,15 +154,13 @@ var skipMode = function() {
         if ( gameMode == 2 ) {
             currentTimedScore--
         };
-        update();
-        shuffledPokemons.shift(1,1);
-        setTimeout(clearAndDraw, 1000);
+        nameCheck();
     };
     skip = 0;
 };
 
-var three21 = 4;
-var countingDown = 4;
+var three21 = 3;
+var countingDown = 3;
 
 var threeToOne = function() {
     document.getElementById("progress").textContent = three21;
@@ -194,6 +183,7 @@ var removeAllListeners = function() {
 };
 
 var restartGame = function() {
+    skipCounter = 0;
     if ( restart == 1 ) {
         for (var i = 1; i < 152; i++) {
             oneTo151.push(i);
@@ -211,7 +201,7 @@ var restartGame = function() {
         namesArray = [];
         typeArray = [];
         seconds = 60;
-        three21 = 4;
+        three21 = 3;
         gameMode = 0;
         difficulty = 0;
         restart = 0;
@@ -271,13 +261,12 @@ var gameInit = function() {
 // Delaying gameInit due to wait for JSON data. 3 secs should be fiune
 var gameDelay = function() {
     if ( restart == 0 ) {
-        addSound("music/theme-2.mp3");
+        addSound("music/theme-1.mp3");
         if ( gameMode != 0 && gameMode != 0 ){
             setTimeout(gameInit, 4100);
             setTimeout(threeToOne, 1000);
             setTimeout(threeToOne, 2000);
             setTimeout(threeToOne, 3000);
-            setTimeout(threeToOne, 4000);
             restart = 1;
         };
     };
@@ -315,7 +304,7 @@ var updateBar = function() {
         var percentage = parseInt(currentForeverScore) / 151;
         percentage = percentage * 100;
         progressBar.style.width = percentage + "%";
-        progress.textContent = currentForeverScore + "/151";
+        progress.textContent = currentForeverScore + "/151" + "Pokemon Skipped:" + skipCounter;
     };
 
     if ( gameMode == 2 ) {
@@ -655,10 +644,6 @@ var nameCheck = function() {
 
 	            update();
 	            shuffledPokemons.shift(1,1);
-
-	            // if ( imgArray.length < 4 ) {
-	            //     getPokemon();
-	            // };
             setTimeout(clearAndDraw, 1000);
 	        };
 	};

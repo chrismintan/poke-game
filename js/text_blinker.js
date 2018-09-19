@@ -1,4 +1,4 @@
-function blink() {
+    function blink() {
         stopBlink()
         bottom.innerHTML = spannify('_')
         intervalID = setInterval(selector, 500)

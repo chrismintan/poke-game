@@ -4,7 +4,6 @@
 	<title>Who's That Pokemon!</title>
 	<meta charset="utf-8">
 	<link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.min.css">
-	<link rel="stylesheet" media="screen" url="https://fontlibrary.org/face/pokemon" type="text/css"/>
 	<link rel="stylesheet" type="text/css" href="css/style.css" />
 </head>
 
@@ -17,6 +16,7 @@
 	<div class="row">
 
 		<!-- Creating 3 columns via bootstrap -->
+        <div class="col-1"></div>
 		<div class="col-2">
 
 			<!-- Difficulty box with 3 settings (easy, medium, hard) -->
@@ -38,7 +38,7 @@
             <div id="restart">Restart</div>
 
             <!-- Creating the Hint section of the game -->
-            <h2 class="headers sides" id="skip">I don't know...<br>Skip!</h2>
+            <h2 class="headers sides" id="skip">I don't know,<br>Skip!</h2>
 
 		</div>
 
@@ -61,10 +61,13 @@
 
 				<!-- Input field where answers are typed in -->
 				<form class="answer-area">
+                            <div class="middle container-fluid col-11" style="position: absolute; visibility: visible;">
+                            <footer id="blinker1">
+                            </footer>
+                            </div>
 					<input type="text" class="typing-field" id="name-input" placeholder="Pokemon Name..." onkeyup="nameCheck()"><br>
 					<input type="text" class="typing-field" id="type-input" placeholder="Pokemon Type..." onkeyup="nameCheck()">
 				</form>
-
 
 		</div>
 
@@ -72,8 +75,8 @@
 		<div class="col-2" align="center">
 
 			<!-- Forever mode score -->
-			<h2 class="headers sides forever">Forever Mode</h2>
-				<h3 class="headers forever" id="forever-header">Current score:</h3>
+			<h2 class="headers sides forever">Forever<br>Mode</h2>
+				<h3 class="headers forever" id="forever-header">Current<br>score:</h3>
 				<h1 class="forever-scores forever" id="forever-current-score"></h1>
 
 				<h3 class= "headers forever" id="forever-header">Best:</h3>
@@ -81,16 +84,14 @@
 
 			<!-- Timed mode score -->
 			<h2 class="headers sides timed">Timed Mode</h2>
-				<h3 class="headers timed" id="timed-header">Current score:</h3>
+				<h3 class="headers timed" id="timed-header">Current<br>score:</h3>
 				<h1 class="timed-scores timed" id="timed-current-score"></h1>
 
 				<h3 class= "headers timed" id="timed-header">Best:</h3>
 				<h1 class= "timed-scores timed" id="timed-best-score"></h1>
-
-
 		</div>
-
-	</div>
+        <div class="col-1"></div>
+    </div>
 
 </div>
 <script src="js/functions.js"></script>

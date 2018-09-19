@@ -5,31 +5,38 @@
 	src: url("../fonts/Pokemon_GB.ttf") format("truetype");
 }
 
+#middle {
+	font-size: 20px;
+}
+
+.row {
+	float: none;
+	font-family: "pokefont";
+}
 
 .container-fluid {
-	width:900px;
-	margin-top: 100px;
-	margin-left: 50px;
+	width: 900px;
+	margin-top: 70px;
 }
 
 .headers {
 	font-size: 17px;
 	white-space: nowrap;
 	text-align: center;
-	margin-left:-20%;
-	margin-right: -20%;
 	font-weight: bolder;
+	font-size: 12px;
 }
 
 .sides {
-	margin-top: 12px;
+	margin-top: 20px;
 }
 
 .options {
 	cursor: pointer;
 	border-radius: 5px;
 	text-indent: 30px;
-	margin: 7px 0;
+	margin: 10px 0;
+	font-size: 10px;
 }
 
 #myCanvas {
@@ -47,6 +54,8 @@
 
 .typing-field {
 	margin: 5px 5px;
+	font-size: 10px;
+	text-align: center;
 }
 
 #myCanvas {
@@ -55,20 +64,21 @@
 }
 
 .forever-scores {
-	font-size: 40px;
+	font-size: 45px;
 }
 
 .timed-scores {
-	font-size: 40px;
+	font-size: 45px;
 }
 
 body {
-	background-color: #ECF51394;
+	background-color: #EBEEB2FF;
 }
 
 .col-2 {
 	border: 2px solid black;
 	border-radius: 30px;
+	height: 455px;
 }
 
 #game-section {
@@ -96,6 +106,8 @@ body {
 
 #start {
 	color: #F88700FF;
+	font-size: 10px;
+	margin-top: 15px;
 }
 
 .progress {
@@ -112,18 +124,19 @@ body {
 	display: block;
 	width: 100%;
 	line-height: 30px;
-	font-size: 20px;
+	font-size: 15px;
 }
 
 #restart {
 	text-align: center;
 	margin-top: 10px;
-	font-size: 20px;
+	font-size: 12px;
 	font-weight: 900;
 	border: 2px solid #FF755FFF;
 	color: #FF3E4BFF;
 	border-radius: 30px;
 	cursor: pointer;
+	padding-top: 5px;
 }
 
 #skip {
@@ -135,8 +148,13 @@ body {
 	border-radius: 25px;
 	color: #f1a167;
 	cursor: help;
+	font-size: 9px;
+	padding-top: 3px;
 }
 
+#blinker1{
+	text-align: center!important;
+}
 
 
 
