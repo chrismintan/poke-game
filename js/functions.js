@@ -12,6 +12,7 @@ var bestForeverScore = 0;
 var currentTimedScore = 0;
 var bestTimedScore = 0;
 var typed;
+var middle = document.getElementById("middle");
 var foreverScore = document.getElementById("forever-current-score");
 var foreverBest = document.getElementById("forever-best-score");
 var timedScore = document.getElementById("timed-current-score");
@@ -28,7 +29,22 @@ var pokedex = {};
 var easyArray = [];
 var skip = 0;
 var restart = 0;
+var sound = 0;
 
+var addSound = function(src) {
+    if ( sound != 1 ) {
+        sound = 1;
+        backgroundMusic = document.createElement("audio");
+        backgroundMusic.id = "myMusic";
+        backgroundMusic.src = src;
+        backgroundMusic.setAttribute("preload", "auto");
+        backgroundMusic.setAttribute("controls", "none");
+        backgroundMusic.style.display = "none";
+        middle.appendChild(backgroundMusic);
+        backgroundMusic.play();
+        document.getElementById("myMusic").loop = true;
+    };
+};
 
 // Generate an array of all the pokemons
 for (var i = 1; i < 152; i++) {
@@ -255,6 +271,7 @@ var gameInit = function() {
 // Delaying gameInit due to wait for JSON data. 3 secs should be fiune
 var gameDelay = function() {
     if ( restart == 0 ) {
+        addSound("music/theme-2.mp3");
         if ( gameMode != 0 && gameMode != 0 ){
             setTimeout(gameInit, 4100);
             setTimeout(threeToOne, 1000);
@@ -677,6 +694,9 @@ var startTimedGame = function() {
 var stopTime = function() {
     clearTimeout(timeoutID);
 };
+
+
+
 
 
 
