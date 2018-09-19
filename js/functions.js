@@ -216,27 +216,27 @@ var gameInit = function() {
         if ( difficulty == 3 ) {
             progress.textContent = "0/151";
             rm.style.display = "block";
-            nmbar.style.display = "block";
+            nmbar.style.display = "inline";
             drawShadow();
         };
         if ( difficulty == 1 ) {
             drawShadow();
             progress.textContent = "0/151";
             rm.style.display = "none";
-            nmbar.style.display = "block";
+            nmbar.style.display = "inline";
         };
         if ( difficulty == 2 ) {
             drawShadow();
             progress.textContent = "0/151";
             rm.style.display = "none";
-            nmbar.style.display = "block";
+            nmbar.style.display = "inline";
         };
         removeAllListeners();
     };
     if ( gameMode == 2 ) {
         if ( difficulty == 3 ) {
         	rm.style.display = "block";
-            nmbar.style.display = "block";
+            nmbar.style.display = "inline";
         	startTimedGame();
         	drawShadow();
         	progress.textContent = seconds;
@@ -246,14 +246,14 @@ var gameInit = function() {
             progress.textContent = seconds;
             startTimedGame();
             rm.style.display = "none";
-            nmbar.style.display = "block";
+            nmbar.style.display = "inline";
         };
         if ( difficulty == 2 ) {
             drawShadow()
             progress.textContent = seconds;
             startTimedGame();
             rm.style.display = "none";
-            nmbar.style.display = "block";
+            nmbar.style.display = "inline";
         };
     };
 };
@@ -304,7 +304,7 @@ var updateBar = function() {
         var percentage = parseInt(currentForeverScore) / 151;
         percentage = percentage * 100;
         progressBar.style.width = percentage + "%";
-        progress.textContent = currentForeverScore + "/151" + "Pokemon Skipped:" + skipCounter;
+        progress.textContent = currentForeverScore + "/151" + "  Pokemon Skipped: " + skipCounter;
     };
 
     if ( gameMode == 2 ) {

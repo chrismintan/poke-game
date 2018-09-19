@@ -46,6 +46,7 @@
 
 #name-input {
 	width: 275px;
+	display: inline;
 }
 
 #type-input {
@@ -155,6 +156,12 @@ body {
 #blinker1{
 	text-align: center!important;
 }
+
+
+
+
+
+
 
 
 
