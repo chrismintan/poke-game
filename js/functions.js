@@ -193,6 +193,8 @@ var restartGame = function() {
         currentForeverScore = 0;
         currentTimedScore = 0;
         progress.textContent = "";
+        gameMode = 0;
+        difficulty = 0;
         setUpListeners();
         update();
         shuffle();
@@ -205,7 +207,11 @@ var restartGame = function() {
         gameMode = 0;
         difficulty = 0;
         restart = 0;
-
+        easyButton.style.backgroundColor = "#EBEEB2FF";
+        mediumButton.style.backgroundColor = "#EBEEB2FF";
+        hardButton.style.backgroundColor = "#EBEEB2FF";
+        foreverButton.style.backgroundColor = "#EBEEB2FF";
+        timedButton.style.backgroundColor = "#EBEEB2FF";
     };
 };
 
