@@ -88,8 +88,8 @@ var changeEasy = function() {
     hardButton.classList.remove("selected");
     easyButton.classList.add("selected");
     easyButton.style.backgroundColor = "#EBEEB2FF";
-        mediumButton.style.backgroundColor = "#EBEEB2FF";
-        hardButton.style.backgroundColor = "#EBEEB2FF";
+    mediumButton.style.backgroundColor = "#EBEEB2FF";
+    hardButton.style.backgroundColor = "#EBEEB2FF";
     easyButton.style.backgroundColor = "#f2d468";
 };
 
@@ -99,8 +99,8 @@ var changeMedium = function() {
     easyButton.classList.remove("selected");
     mediumButton.classList.add("selected");
     easyButton.style.backgroundColor = "#EBEEB2FF";
-        mediumButton.style.backgroundColor = "#EBEEB2FF";
-        hardButton.style.backgroundColor = "#EBEEB2FF";
+    mediumButton.style.backgroundColor = "#EBEEB2FF";
+    hardButton.style.backgroundColor = "#EBEEB2FF";
     mediumButton.style.backgroundColor = "#f2d468";
     getPokemon();
 };
@@ -111,8 +111,8 @@ var changeHard = function() {
     mediumButton.classList.remove("selected");
     hardButton.classList.add("selected");
     easyButton.style.backgroundColor = "#EBEEB2FF";
-        mediumButton.style.backgroundColor = "#EBEEB2FF";
-        hardButton.style.backgroundColor = "#EBEEB2FF";
+    mediumButton.style.backgroundColor = "#EBEEB2FF";
+    hardButton.style.backgroundColor = "#EBEEB2FF";
     hardButton.style.backgroundColor = "#f2d468";
     getPokemon();
 };
