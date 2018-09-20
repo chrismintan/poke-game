@@ -87,6 +87,7 @@ var changeEasy = function() {
     mediumButton.classList.remove("selected");
     hardButton.classList.remove("selected");
     easyButton.classList.add("selected");
+    easyButton.style.backgroundColor = "#f2d468";
 };
 
 var changeMedium = function() {
@@ -94,6 +95,7 @@ var changeMedium = function() {
     hardButton.classList.remove("selected");
     easyButton.classList.remove("selected");
     mediumButton.classList.add("selected");
+    easyButton.style.backgroundColor = "#f2d468";
     getPokemon();
 };
 
@@ -102,6 +104,7 @@ var changeHard = function() {
     easyButton.classList.remove("selected");
     mediumButton.classList.remove("selected");
     hardButton.classList.add("selected");
+    hardButton.style.backgroundColor = "#f2d468";
     getPokemon();
 };
 
@@ -109,12 +112,14 @@ var foreverMode = function() {
     gameMode = 1;
     timedButton.classList.remove("selected");
     foreverButton.classList.add("selected");
+    foreverButton.style.backgroundColor = "#f2d468";
 };
 
 var timedMode = function() {
 	gameMode = 2;
     foreverButton.classList.remove("selected");
     timedButton.classList.add("selected");
+    timedButton.style.backgroundColor = "#f2d468";
 }
 
 var skipMode = function() {
