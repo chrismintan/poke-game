@@ -87,6 +87,9 @@ var changeEasy = function() {
     mediumButton.classList.remove("selected");
     hardButton.classList.remove("selected");
     easyButton.classList.add("selected");
+    easyButton.style.backgroundColor = "#EBEEB2FF";
+        mediumButton.style.backgroundColor = "#EBEEB2FF";
+        hardButton.style.backgroundColor = "#EBEEB2FF";
     easyButton.style.backgroundColor = "#f2d468";
 };
 
@@ -95,7 +98,10 @@ var changeMedium = function() {
     hardButton.classList.remove("selected");
     easyButton.classList.remove("selected");
     mediumButton.classList.add("selected");
-    easyButton.style.backgroundColor = "#f2d468";
+    easyButton.style.backgroundColor = "#EBEEB2FF";
+        mediumButton.style.backgroundColor = "#EBEEB2FF";
+        hardButton.style.backgroundColor = "#EBEEB2FF";
+    mediumButton.style.backgroundColor = "#f2d468";
     getPokemon();
 };
 
@@ -104,6 +110,9 @@ var changeHard = function() {
     easyButton.classList.remove("selected");
     mediumButton.classList.remove("selected");
     hardButton.classList.add("selected");
+    easyButton.style.backgroundColor = "#EBEEB2FF";
+        mediumButton.style.backgroundColor = "#EBEEB2FF";
+        hardButton.style.backgroundColor = "#EBEEB2FF";
     hardButton.style.backgroundColor = "#f2d468";
     getPokemon();
 };
@@ -112,6 +121,7 @@ var foreverMode = function() {
     gameMode = 1;
     timedButton.classList.remove("selected");
     foreverButton.classList.add("selected");
+    timedButton.style.backgroundColor = "#EBEEB2FF";
     foreverButton.style.backgroundColor = "#f2d468";
 };
 
@@ -119,6 +129,7 @@ var timedMode = function() {
 	gameMode = 2;
     foreverButton.classList.remove("selected");
     timedButton.classList.add("selected");
+    foreverButton.style.backgroundColor = "#EBEEB2FF";
     timedButton.style.backgroundColor = "#f2d468";
 }
 
@@ -272,7 +283,7 @@ var gameInit = function() {
 // Delaying gameInit due to wait for JSON data. 3 secs should be fiune
 var gameDelay = function() {
     if ( restart == 0 ) {
-        addSound("music/theme-1.mp3");
+        addSound("music/theme-2.mp3");
         if ( gameMode != 0 && gameMode != 0 ){
             setTimeout(gameInit, 4100);
             setTimeout(threeToOne, 1000);
@@ -482,7 +493,7 @@ var drawShadow = function() {
 		var canvas = document.getElementById("myCanvas")
 		ctx = canvas.getContext("2d");
 		shownImage = new Image();
-		shownImage.src = "new-sprites/" + shuffledPokemons[0] + ".png";
+		shownImage.src = "sprites/" + shuffledPokemons[0] + ".png";
 		// shownImage.setAttribute("crossorigin","Anonymous");
 
 		// onload is used to ensure image has has finished loading
