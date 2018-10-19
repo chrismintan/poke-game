@@ -7,10 +7,11 @@ This project is inspired by the popular question-and-answer segment that is feat
 ### Demo
 You can see how the game works below:
 
-![Demo Gif]()
+![Demo Gif](https://github.com/chrismintan/whos-that-pokemon/blob/master/assets/shadow.gif)
+
+[Link to Game](https://chrismintan.github.io/whos-that-pokemon/)
 
 Have fun playing! For more information on how I made the game read on!
-
 
 ## Application and Development Process
 ### Built With
@@ -31,9 +32,17 @@ The website then returns a bunch of data relating to the Pokémon requested in J
 ### Drawing on Canvas
 [Canvas](https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API) draws images by creating image Objects and assigning their src, x and y positions, width and height. The main function of Canvas used in this project is it's ability to manipulate the pixels of a picture. The Image data taken from PokéAPI comes in the form of a **sprite**, which you will see later why it is so crucial.
 
-There are many properties of a sprite but the one most crucial to this project would be that it is a "stand-alone" graphic element. Meaning that unlike normal pictures, it only has pixels where relavent. In our case, the Pokémon image only has pixels where the Pokémon is. This allows the sprite to be placed on a background without having a white square around it!
+There are many properties of a sprite but the one most crucial to this project would be that it is a "stand-alone" graphic element. Meaning that unlike normal pictures, it only has pixels where relavent.
 
-The Pokémon image is first drawn on the Canvas.
+![Sprite vs Non-sprite](https://github.com/chrismintan/whos-that-pokemon/blob/master/assets/sprite-vs-image.png)
+
+In our case, the Pokémon image only has pixels where the Pokémon is. This allows the sprite to be placed on a background without having a white square around it!
+
+![Sprite transform](https://github.com/chrismintan/whos-that-pokemon/blob/master/assets/sprite-transform.png)
+
+You will see later how this not only improves the visuals by allowing a nice background image to be placed but it also allows us to manipulate the picture to draw a shadow.
+
+The Pokémon image is first drawn on the Canvas using the following code:
 
 ```
 var canvas = document.getElementById("myCanvas")
@@ -69,6 +78,10 @@ for (var i = 0; i < pokemonImage.data.length; i+=4 ) {
 ctx.putImageData( pokemonImage, 0, 0 );
 ```
 
+![Greyscale Demo](https://github.com/chrismintan/whos-that-pokemon/blob/master/assets/greyscale.gif)
+
+Greyscaling the sprite now gives the Pokémons the classic non colored Game Boy OG look! Now lets see how making a shadow is done instead.
+
 ### Shadow
 For drawing a shadow instead of greyscale, instead of using the average of every pixel's RGB value, we change all the values to 0 as an RGB value of (0, 0, 0) would equate to black.
 
@@ -90,6 +103,12 @@ ctx.putImageData( pokemonImage, 0, 0 );
 ```
 
 Now the importance of the Pokémon image being a sprite can be seen! If the Pokémon image had a white background, the picture drawn will just be a black square!
+
+However, using a sprite, we can get this:
+
+![Extreme mode gif](https://github.com/chrismintan/whos-that-pokemon/blob/master/assets/extreme.gif)
+
+Now that the pictures have been set up on Canvas, now comes matching the user's input with the correct answer!
 
 ### Answers Checking
 For answers checking, initially I set the winning condition to be if the input equates to the Pokémon's name. However, I realised while doing initial testing that even for huge Pokémon fans (such as myself), I found it difficult to remember the exact spelling of some Pokémons. I mean come on even if we were die hard Pokémon fans are you sure you can remember the spelling of **Kangaskahn**? Or was it **Kangaskhan**? Hmm...
@@ -132,6 +151,12 @@ if ( wordDiff(input, answer) < 3 && wordDiff(input, answer) != false ) {
     revealPokemon()
 }
 ```
+
+You can see it in action below. **Hint: The proper spelling is Kangaskhan!**
+
+![Spelling demo](https://github.com/chrismintan/whos-that-pokemon/blob/master/assets/spelling.gif)
+
+With Forgiving Spelling mode checked, small spelling mistakes such as 'Kangaskahn' would still be accepted as a win condition!
 
 ### Issues Encountered
 While test playing the game, I realised that using AJAX to get data via PokéAPI made the game seem sluggish. Moreover, PokéAPI is banned in several countries thus making my game unplayable in some parts of the world. Using AJAX to fetch data was used purely for learning purposes and it is not a crucial factor in making the game.
