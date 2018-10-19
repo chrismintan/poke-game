@@ -51,13 +51,13 @@ var getPokemon = function(Pokemon_ID) {
 The website then returns a bunch of data relating to the Pokémon requested in JSON format. The JSON data would then be parsed and the data required (namely the Pokémon's Name, Type, and Image URL) would be pushed into an array. Now with this data, I am able to use Canvas to create the game!
 
 ### Drawing on Canvas
-[Canvas](https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API) draws images by creating image Objects and assigning their src, x and y positions, width and height. The main function of Canvas used in this project is it's ability to manipulate the pixels of a picture. The Image data taken from PokéAPI comes in the form of a **sprite**, which you will see later why it is so crucial.
+[Canvas](https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API) draws images by creating image Objects and assigning their src, x and y positions, width and height. The main function of Canvas used in this project is it's ability to manipulate the pixels of a picture. The Image data taken from PokéAPI comes in the form of a **sprite**.
 
-There are many properties of a sprite but the one most crucial to this project would be that it is a "stand-alone" graphic element. Meaning that unlike normal pictures, it only has pixels where relavent.
+There are many properties of a sprite but the most vital property with regards to this project would be that it is a "stand-alone" graphic element. Meaning that unlike normal pictures, it only has pixels where relavent.
 
 ![Sprite vs Non-sprite](https://github.com/chrismintan/whos-that-pokemon/blob/master/assets/sprite-vs-image.png)
 
-In our case, the Pokémon image only has pixels where the Pokémon is. This allows the sprite to be placed on a background without having a white square around it!
+In our case, the Pokémon image only has pixels where the Pokémon is. As seen below, this allows the sprite to be placed on a background without having a white square around it!
 
 ![Sprite transform](https://github.com/chrismintan/whos-that-pokemon/blob/master/assets/sprite-transform.png)
 
