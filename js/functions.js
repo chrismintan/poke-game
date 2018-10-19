@@ -383,7 +383,6 @@ var update = function() {
 // Records the Pokemon's Name into nameArray, type into typeArray & image url into imgArray
 var responseHandler = function() {
 	results = JSON.parse(this.responseText);
-	console.log(results);
 
     if ( results.name != undefined ) {
         namesArray.push(results.name);

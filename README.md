@@ -21,10 +21,31 @@ Have fun playing! For more information on how I made the game read on!
 An AJAX request is made to [PokéAPI](https://pokeapi.co/) which is a website which provides a RESTful API interface to highly detailed objects built from thousands of lines of data related to Pokémon. The game works by getting Pokémon data via this API by performing an AJAX Call.
 
 ```
-var request = new XMLHttpRequest()
-    request.addEventListener("load", responseHandler)
-   	request.open("GET", `https://pokeapi.co/api/v2/pokemon/${Pokemon_ID}/`
-   	request.send()
+var responseHandler = function() {
+
+		// As the data is in JSON format, I would first need to parse it
+		let results = JSON.parse(this.responseText);
+
+		// The Pokémon's name, type, and image link can then be accessed through their specific end points. I pushed the results into an Array of names, types, and image urls
+
+		// For the Pokémon's name
+		namesArray.push(results.name)
+
+		// For the Pokémon's type(s)
+		typeArray.push(results.types)
+
+		// For the Pokémon's image
+		imgArray.push(results.sprites.front_default)
+
+};
+
+// Function for sending a 'GET' request to the PokéAPI for a particular Pokémon
+var getPokemon = function(Pokemon_ID) {
+		var request = new XMLHttpRequest();
+		    request.addEventListener("load", responseHandler);
+		   	request.open("GET", `https://pokeapi.co/api/v2/pokemon/${Pokemon_ID}/`
+		   	request.send();
+};
 ```
 
 The website then returns a bunch of data relating to the Pokémon requested in JSON format. The JSON data would then be parsed and the data required (namely the Pokémon's Name, Type, and Image URL) would be pushed into an array. Now with this data, I am able to use Canvas to create the game!
@@ -178,8 +199,12 @@ var mute = function() {
 document.getElementById('mute').addEventListener('click', mute)
 ```
 
+Also for those who are unfamiliar or have forgotten some of the wonderful 151 Pokémons, there is a 'Skip' button which can be used!
+
 ## Areas to Improve on
-Currently, only Gen 1 Pokémons are in the game. The other Gens can be added but I'm only a fan of the OG Pokémons. 
+Currently, only Gen 1 Pokémons are in the game. The other Gens can be added but I'm only a fan of the OG Pokémons. Also I could (and probably should) add in MissingNo. as it could be debated that it is part of the original Gen 1 crew.
+
+On a more serious note, a proper further improvement would be to create cookies to save player's best scores for the various modes of play.
 
 ## Author(s)
 - Christopher Tan
@@ -189,7 +214,7 @@ This is a completely open source project! Feel free to submit pull requests or l
 ## Acknowledgements
 This project is purely educational and expirimental. It would not have been possible without the following sources:
 
-* [Nintendo](https://www.nintendo.com/) for making the game we all love along with the awesome [Pokémon theme song](https://www.youtube.com/watch?v=JuYeHPFR3f0)
+* [Nintendo](https://www.nintendo.com/) for making the game we all love along with the awesome [Pokémon theme song](https://www.youtube.com/watch?v=JuYeHPFR3f0).
 
 * [PokéAPI](https://pokeapi.co/) for their thorough Pokémon data. It is an extremely fun API to use for students to use. It's Pokémon after all!
 

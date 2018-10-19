@@ -17,6 +17,7 @@
     right: -100%;
     top: -100%;
     bottom: -100%;
+    z-index: -1;
 }
 
 #middle {
@@ -198,16 +199,86 @@ body {
 	text-decoration: line-through;
 }
 
-#blinker1{
-	text-align: center!important;
+.footer {
+	z-index: 10;
+
 }
 
 
+#social1 {
+	bottom: -120px;
+	text-align: center;
+	font-family: garamond;
+}
 
+#copyright {
+	position: relative;
+	display: inline;
+	color: #4C4C4BFF;
+	font-weight: bold;
+}
 
+#social {
+  align-items: center;
+  justify-content: center;
+  line-height: 100px;
+  font-size: 0.66em;
+  display: inline;
+  vertical-align: middle;
+  margin-bottom: 20px;
+}
 
+#copy {
+	font-size: 2em;
+	display:inline;
+}
 
+#nint {
+	bottom: -90px;
+	text-align: center;
+	font-family: garamond;
+}
 
+.fa {
+  padding: 10px;
+  font-size: 25px;
+  width: 30px;
+  text-align: center;
+  text-decoration: none;
+  margin: 5px 2px;
+
+}
+
+.fa:hover {
+    opacity: 0.7;
+}
+
+.fa-facebook {
+  background: #3B5998;
+  color: white;
+  display: table-cell;
+  align-items: center;
+  justify-content: center;
+  opacity: 0.8;
+}
+
+.fa-linkedin {
+  background: #007bb5;
+  color: white;
+  opacity: 0.8;
+}
+
+.fa-skype {
+  background: #00aff0;
+  color: white;
+  opacity: 0.8;
+}
+
+.fa-github {
+	background: #A5B5F3;
+	color: white;
+	opacity: 0.8;
+}
 
 
 
