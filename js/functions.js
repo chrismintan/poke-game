@@ -1,5 +1,5 @@
 
-var poke = ["Bulbasaur","Ivysaur","Venusaur","Charmander","Charmeleon","Charizard","Squirtle","Wartortle","Blastoise","Caterpie","Metapod","Butterfree","Weedle","Kakuna","Beedrill","Pidgey","Pidgeotto","Pidgeot","Rattata","Raticate","Spearow","Fearow","Ekans","Arbok","Pikachu","Raichu","Sandshrew","Sandslash","Nidoran","Nidorina","Nidoqueen","Nidoran","Nidorino","Nidoking","Clefairy","Clefable","Vulpix","Ninetales","Jigglypuff","Wigglytuff","Zubat","Golbat","Oddish","Gloom","Vileplume","Paras","Parasect","Venonat","Venomoth","Diglett","Dugtrio","Meowth","Persian","Psyduck","Golduck","Mankey","Primeape","Growlithe","Arcanine","Poliwag","Poliwhirl","Poliwrath","Abra","Kadabra","Alakazam","Machop","Machoke","Machamp","Bellsprout","Weepinbell","Victreebel","Tentacool","Tentacruel","Geodude","Graveler","Golem","Ponyta","Rapidash","Slowpoke","Slowbro","Magnemite","Magneton","Farfetchd","Doduo","Dodrio","Seel","Dewgong","Grimer","Muk","Shellder","Cloyster","Gastly","Haunter","Gengar","Onix","Drowzee","Hypno","Krabby","Kingler","Voltorb","Electrode","Exeggcute","Exeggutor","Cubone","Marowak","Hitmonlee","Hitmonchan","Lickitung","Koffing","Weezing","Rhyhorn","Rhydon","Chansey","Tangela","Kangaskhan","Horsea","Seadra","Goldeen","Seaking","Staryu","Starmie","Mr. Mime","Scyther","Jynx","Electabuzz","Magmar","Pinsir","Tauros","Magikarp","Gyarados","Lapras","Ditto","Eevee","Vaporeon","Jolteon","Flareon","Porygon","Omanyte","Omastar","Kabuto","Kabutops","Aerodactyl","Snorlax","Articuno","Zapdos","Moltres","Dratini","Dragonair","Dragonite","Mewtwo","Mew"];
+var poke = ["Bulbasaur","Ivysaur","Venusaur","Charmander","Charmeleon","Charizard","Squirtle","Wartortle","Blastoise","Caterpie","Metapod","Butterfree","Weedle","Kakuna","Beedrill","Pidgey","Pidgeotto","Pidgeot","Rattata","Raticate","Spearow","Fearow","Ekans","Arbok","Pikachu","Raichu","Sandshrew","Sandslash","Nidoran","Nidorina","Nidoqueen","Nidoran","Nidorino","Nidoking","Clefairy","Clefable","Vulpix","Ninetales","Jigglypuff","Wigglytuff","Zubat","Golbat","Oddish","Gloom","Vileplume","Paras","Parasect","Venonat","Venomoth","Diglett","Dugtrio","Meowth","Persian","Psyduck","Golduck","Mankey","Primeape","Growlithe","Arcanine","Poliwag","Poliwhirl","Poliwrath","Abra","Kadabra","Alakazam","Machop","Machoke","Machamp","Bellsprout","Weepinbell","Victreebel","Tentacool","Tentacruel","Geodude","Graveler","Golem","Ponyta","Rapidash","Slowpoke","Slowbro","Magnemite","Magneton","Farfetchd","Doduo","Dodrio","Seel","Dewgong","Grimer","Muk","Shellder","Cloyster","Gastly","Haunter","Gengar","Onix","Drowzee","Hypno","Krabby","Kingler","Voltorb","Electrode","Exeggcute","Exeggutor","Cubone","Marowak","Hitmonlee","Hitmonchan","Lickitung","Koffing","Weezing","Rhyhorn","Rhydon","Chansey","Tangela","Kangaskhan","Horsea","Seadra","Goldeen","Seaking","Staryu","Starmie","Mr Mime","Scyther","Jynx","Electabuzz","Magmar","Pinsir","Tauros","Magikarp","Gyarados","Lapras","Ditto","Eevee","Vaporeon","Jolteon","Flareon","Porygon","Omanyte","Omastar","Kabuto","Kabutops","Aerodactyl","Snorlax","Articuno","Zapdos","Moltres","Dratini","Dragonair","Dragonite","Mewtwo","Mew"];
 var currentPokeNum;
 var pastPokemons = [];
 var oneTo151 = [];
@@ -601,8 +601,6 @@ var clearAndDraw = function() {
     clearInputFields();
 };
 
-
-var wtf;
 // Function  for checking the name of the Pokemon
 var nameCheck = function() {
 
@@ -733,29 +731,28 @@ var nameCheck = function() {
             };
         };
         if ( difficulty == 1 ) {
-        	var wtf = shuffledPokemons[0];
-        	    if ( Boolean( document.getElementById("name-input").value.toLowerCase() == pokedex[shuffledPokemons[0]].toLowerCase() )  == true ) {
-                revealPokemon();
+    	    if ( Boolean( document.getElementById("name-input").value.toLowerCase() == pokedex[shuffledPokemons[0]].toLowerCase() )  == true ) {
+            revealPokemon();
 
-    	            // Add difficulty conditions here
-    	            if ( gameMode == 1 ) {
-    		            currentForeverScore++
-    		            if ( currentForeverScore > bestForeverScore && skip == 0 ) {
-    		                bestForeverScore = currentForeverScore;
-    		            };
-    		        };
+	            // Add difficulty conditions here
+	            if ( gameMode == 1 ) {
+		            currentForeverScore++
+		            if ( currentForeverScore > bestForeverScore && skip == 0 ) {
+		                bestForeverScore = currentForeverScore;
+		            };
+		        };
 
-    		        if ( gameMode == 2 ) {
-    		        	currentTimedScore++
-    		            if ( currentTimedScore > bestTimedScore && skip == 0 ) {
-    		                bestTimedScore = currentTimedScore;
-    		            };
-    		        };
+		        if ( gameMode == 2 ) {
+		        	currentTimedScore++
+		            if ( currentTimedScore > bestTimedScore && skip == 0 ) {
+		                bestTimedScore = currentTimedScore;
+		            };
+		        };
 
-    	            update();
-    	            shuffledPokemons.shift(1,1);
-                setTimeout(clearAndDraw, 1000);
-    	        };
+	            update();
+	            shuffledPokemons.shift(1,1);
+            setTimeout(clearAndDraw, 1000);
+	        };
     	};
     };
 };
