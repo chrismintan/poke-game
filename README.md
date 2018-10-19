@@ -101,10 +101,10 @@ ctx.putImageData( pokemonImage, 0, 0 );
 
 ![Greyscale Demo](https://github.com/chrismintan/whos-that-pokemon/blob/master/assets/greyscale.gif)
 
-Greyscaling the sprite now gives the Pokémons the classic non colored Game Boy OG look! Now lets see how making a silhouette is done instead.
+Greyscaling the sprite now gives the Pokémons the classic non colored Game Boy OG look!
 
 ### Silhouette
-For drawing a silhouette instead of greyscale, instead of using the average of every pixel's RGB value, we change all the values to 0 as an RGB value of (0, 0, 0) would equate to black.
+Shadow difficulty involves drawing a silhouette instead of greyscale. For this, instead of using the average of every pixel's RGB value, we change all the values to 0 (as rgb(0,0,0) = black!).
 
 ```
 for (var i = 0; i < pokemonImage.data.length; i+=4 ) {
@@ -149,7 +149,7 @@ var wordDiff = function(str1, str2) {
         return false;
     }
 
-    // This loops through each letter and checks if both characters are equal. If it is different, adds 1 to numDiffChar and when it reaches the end of the word it returns numDiffChar which is the number of different letters between the two strings which were passed into the function
+    // If the two strings inputted are the same length and do not equate to each, this function loops through each letter and checks if both characters are equal. If it is different, it adds 1 to the variable numDiffChar and when it reaches the end of the word it returns numDiffChar which is the number of different letters between the two strings which were passed into the function
 
     var numDiffChar = 0;
     var index = 0;
@@ -163,17 +163,17 @@ var wordDiff = function(str1, str2) {
 };
 ```
 
-With forgiving spelling, instead of the winning condition being the user's input being the same as the correct answer, the winning condition is set to be if the number of different characters are less than 3. The code can be seen below:
+With forgiving spelling, instead of the winning condition being the user's input being exactly the same as the correct answer, the winning condition is set to be if the number of different characters are less than 3. The code can be seen below:
 
 ```
-// Using the wordDiff function we are able to find out the number of different characters between the user's input and the correct answer. An additional conditional of wordDiff != false is added to ensure that the word length must be the same before winning condition is met
+// Using the wordDiff function we are able to find out the number of different characters between the user's input and the correct answer. An additional conditional of ( wordDiff != false ) is added to ensure that the word length must be the same before winning condition is met
 
 if ( wordDiff(input, answer) < 3 && wordDiff(input, answer) != false ) {
     revealPokemon()
 }
 ```
 
-You can see it in action below. **Hint: The proper spelling is Kangaskhan!**
+You can see it in action below. **Hint: The proper spelling is actually Kangaskhan!**
 
 ![Spelling demo](https://github.com/chrismintan/whos-that-pokemon/blob/master/assets/spelling.gif)
 
