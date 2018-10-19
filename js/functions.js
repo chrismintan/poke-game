@@ -1,4 +1,3 @@
-console.log('should not show')
 
 var poke = ["Bulbasaur","Ivysaur","Venusaur","Charmander","Charmeleon","Charizard","Squirtle","Wartortle","Blastoise","Caterpie","Metapod","Butterfree","Weedle","Kakuna","Beedrill","Pidgey","Pidgeotto","Pidgeot","Rattata","Raticate","Spearow","Fearow","Ekans","Arbok","Pikachu","Raichu","Sandshrew","Sandslash","Nidoran","Nidorina","Nidoqueen","Nidoran","Nidorino","Nidoking","Clefairy","Clefable","Vulpix","Ninetales","Jigglypuff","Wigglytuff","Zubat","Golbat","Oddish","Gloom","Vileplume","Paras","Parasect","Venonat","Venomoth","Diglett","Dugtrio","Meowth","Persian","Psyduck","Golduck","Mankey","Primeape","Growlithe","Arcanine","Poliwag","Poliwhirl","Poliwrath","Abra","Kadabra","Alakazam","Machop","Machoke","Machamp","Bellsprout","Weepinbell","Victreebel","Tentacool","Tentacruel","Geodude","Graveler","Golem","Ponyta","Rapidash","Slowpoke","Slowbro","Magnemite","Magneton","Farfetchd","Doduo","Dodrio","Seel","Dewgong","Grimer","Muk","Shellder","Cloyster","Gastly","Haunter","Gengar","Onix","Drowzee","Hypno","Krabby","Kingler","Voltorb","Electrode","Exeggcute","Exeggutor","Cubone","Marowak","Hitmonlee","Hitmonchan","Lickitung","Koffing","Weezing","Rhyhorn","Rhydon","Chansey","Tangela","Kangaskhan","Horsea","Seadra","Goldeen","Seaking","Staryu","Starmie","Mr. Mime","Scyther","Jynx","Electabuzz","Magmar","Pinsir","Tauros","Magikarp","Gyarados","Lapras","Ditto","Eevee","Vaporeon","Jolteon","Flareon","Porygon","Omanyte","Omastar","Kabuto","Kabutops","Aerodactyl","Snorlax","Articuno","Zapdos","Moltres","Dratini","Dragonair","Dragonite","Mewtwo","Mew"];
 var currentPokeNum;
@@ -426,7 +425,7 @@ var shuffle = function() {
 		rNum = Math.floor( Math.random()*i );
 		shuffledPokemons.push(oneTo151[rNum]);
         oneTo151.splice(rNum,1);
-	} console.log(shuffledPokemons);
+	}
 };
 
 // Function to get a random Pokemon from the remaining Pokemons
@@ -607,95 +606,158 @@ var wtf;
 // Function  for checking the name of the Pokemon
 var nameCheck = function() {
 
-    if ( difficulty == 2 ) {
+    if ( spelling == 1 ) {
 
-        if ( document.getElementById("name-input").value.toLowerCase() == pokedex[shuffledPokemons[0]].toLowerCase() ) {
-            revealPokemon();
+        if ( difficulty == 1 || difficulty == 2 ) {
+            let input = document.getElementById("name-input").value.toLowerCase();
+            let answer = pokedex[shuffledPokemons[0]].toLowerCase();
 
-            // Add difficulty conditions here
-            if ( gameMode == 1 ) {
-	            currentForeverScore++
-	            if ( currentForeverScore > bestForeverScore && skip == 0 ) {
-	                bestForeverScore = currentForeverScore;
-	            };
-	        };
+            if ( wordDiff(input, answer) < 3 && wordDiff(input, answer) != false ) {
+                revealPokemon()
+                if ( gameMode == 1 ) {
+                    currentForeverScore++
+                    if ( currentForeverScore > bestForeverScore && skip == 0 ) {
+                        bestForeverScore = currentForeverScore;
+                    };
+                };
 
-	        if ( gameMode == 2 ) {
-	        	currentTimedScore++
-	            if ( currentTimedScore > bestTimedScore && skip == 0 ) {
-	                bestTimedScore = currentTimedScore;
-	            };
-	        };
+                if ( gameMode == 2 ) {
+                    currentTimedScore++
+                    if ( currentTimedScore > bestTimedScore && skip == 0 ) {
+                        bestTimedScore = currentTimedScore;
+                    };
+                };
 
-            update();
-            shuffledPokemons.shift(1,1);
-            imgArray.shift(1,1);
-            namesArray.shift(1,1);
-            typeArray.shift(1,1);
+                update();
+                shuffledPokemons.shift(1,1);
+                setTimeout(clearAndDraw, 1000);
+            }
 
-            // Make AJAX request in advance once array has less than 4
-            // This is to avoid any 'lag'
-            // if ( imgArray.length < 4 ) {
-            //     getPokemon();
-            // };
+        } else if ( difficulty == 3 ) {
+            let input1 = document.getElementById("name-input").value.toLowerCase();
 
-            // Timeout delay of 1 second so that user can see the Pokemon before clearing the canvas
-            setTimeout(clearAndDraw, 1000);
+            let answer1 = pokedex[shuffledPokemons[0]].toLowerCase();
+
+            let typeInput = document.getElementById('type-input').value.toLowerCase()
+
+            let types = pokemon.pokemon[shuffledPokemons[0]-1].type.map(v => v.toLowerCase());
+
+            if ( wordDiff(input1, answer1) < 3 && wordDiff(input1, answer1) != false && types.includes(typeInput) ) {
+
+                revealPokemon()
+                if ( gameMode == 1 ) {
+                    currentForeverScore++
+                    if ( currentForeverScore > bestForeverScore && skip == 0 ) {
+                        bestForeverScore = currentForeverScore;
+                    };
+                };
+
+                if ( gameMode == 2 ) {
+                    currentTimedScore++
+                    if ( currentTimedScore > bestTimedScore && skip == 0 ) {
+                        bestTimedScore = currentTimedScore;
+                    };
+                };
+
+                update();
+                shuffledPokemons.shift(1,1);
+                setTimeout(clearAndDraw, 1000);
+            }
+
+        }
+
+    } else {
+
+        if ( difficulty == 2 ) {
+
+            if ( document.getElementById("name-input").value.toLowerCase() == pokedex[shuffledPokemons[0]].toLowerCase() ) {
+                revealPokemon();
+
+                // Add difficulty conditions here
+                if ( gameMode == 1 ) {
+    	            currentForeverScore++
+    	            if ( currentForeverScore > bestForeverScore && skip == 0 ) {
+    	                bestForeverScore = currentForeverScore;
+    	            };
+    	        };
+
+    	        if ( gameMode == 2 ) {
+    	        	currentTimedScore++
+    	            if ( currentTimedScore > bestTimedScore && skip == 0 ) {
+    	                bestTimedScore = currentTimedScore;
+    	            };
+    	        };
+
+                update();
+                shuffledPokemons.shift(1,1);
+                imgArray.shift(1,1);
+                namesArray.shift(1,1);
+                typeArray.shift(1,1);
+
+                // Make AJAX request in advance once array has less than 4
+                // This is to avoid any 'lag'
+                // if ( imgArray.length < 4 ) {
+                //     getPokemon();
+                // };
+
+                // Timeout delay of 1 second so that user can see the Pokemon before clearing the canvas
+                setTimeout(clearAndDraw, 1000);
+            };
         };
-    };
-    if ( difficulty == 3 ) {
-        if ( document.getElementById("name-input").value.toLowerCase() == pokedex[shuffledPokemons[0]].toLowerCase() && ( pokemon.pokemon[shuffledPokemons[0] - 1].type[0].toLowerCase().includes(document.getElementById("type-input").value.toLowerCase()) || pokemon.pokemon[shuffledPokemons[0] - 1].type[1].toLowerCase().includes(document.getElementById("type-input").value.toLowerCase()) )) {
-            revealPokemon();
-	        if ( gameMode == 1 ) {
-	            currentForeverScore++
-	            if ( currentForeverScore > bestForeverScore && skip == 0 ) {
-	                bestForeverScore = currentForeverScore;
-	            };
-	        };
-	        if ( gameMode == 2 ) {
-	        	currentTimedScore++
-	            if ( currentTimedScore > bestTimedScore && skip == 0 ) {
-	                bestTimedScore = currentTimedScore;
-	            };
-	        };
+        if ( difficulty == 3 ) {
+            if ( document.getElementById("name-input").value.toLowerCase() == pokedex[shuffledPokemons[0]].toLowerCase() && ( pokemon.pokemon[shuffledPokemons[0] - 1].type[0].toLowerCase().includes(document.getElementById("type-input").value.toLowerCase()) || pokemon.pokemon[shuffledPokemons[0] - 1].type[1].toLowerCase().includes(document.getElementById("type-input").value.toLowerCase()) )) {
+                revealPokemon();
+    	        if ( gameMode == 1 ) {
+    	            currentForeverScore++
+    	            if ( currentForeverScore > bestForeverScore && skip == 0 ) {
+    	                bestForeverScore = currentForeverScore;
+    	            };
+    	        };
+    	        if ( gameMode == 2 ) {
+    	        	currentTimedScore++
+    	            if ( currentTimedScore > bestTimedScore && skip == 0 ) {
+    	                bestTimedScore = currentTimedScore;
+    	            };
+    	        };
 
-            update();
-            shuffledPokemons.shift(1,1);
-            imgArray.shift(1,1);
-            namesArray.shift(1,1);
-            typeArray.shift(1,1);
+                update();
+                shuffledPokemons.shift(1,1);
+                imgArray.shift(1,1);
+                namesArray.shift(1,1);
+                typeArray.shift(1,1);
 
-            // if ( imgArray.length < 4 ) {
-            //     getPokemon();
-            // };
-            setTimeout(clearAndDraw, 1000);
+                // if ( imgArray.length < 4 ) {
+                //     getPokemon();
+                // };
+                setTimeout(clearAndDraw, 1000);
+            };
         };
+        if ( difficulty == 1 ) {
+        	var wtf = shuffledPokemons[0];
+        	    if ( Boolean( document.getElementById("name-input").value.toLowerCase() == pokedex[shuffledPokemons[0]].toLowerCase() )  == true ) {
+                revealPokemon();
+
+    	            // Add difficulty conditions here
+    	            if ( gameMode == 1 ) {
+    		            currentForeverScore++
+    		            if ( currentForeverScore > bestForeverScore && skip == 0 ) {
+    		                bestForeverScore = currentForeverScore;
+    		            };
+    		        };
+
+    		        if ( gameMode == 2 ) {
+    		        	currentTimedScore++
+    		            if ( currentTimedScore > bestTimedScore && skip == 0 ) {
+    		                bestTimedScore = currentTimedScore;
+    		            };
+    		        };
+
+    	            update();
+    	            shuffledPokemons.shift(1,1);
+                setTimeout(clearAndDraw, 1000);
+    	        };
+    	};
     };
-    if ( difficulty == 1 ) {
-    	var wtf = shuffledPokemons[0];
-    	    if ( Boolean( document.getElementById("name-input").value.toLowerCase() == pokedex[shuffledPokemons[0]].toLowerCase() )  == true ) {
-            revealPokemon();
-
-	            // Add difficulty conditions here
-	            if ( gameMode == 1 ) {
-		            currentForeverScore++
-		            if ( currentForeverScore > bestForeverScore && skip == 0 ) {
-		                bestForeverScore = currentForeverScore;
-		            };
-		        };
-
-		        if ( gameMode == 2 ) {
-		        	currentTimedScore++
-		            if ( currentTimedScore > bestTimedScore && skip == 0 ) {
-		                bestTimedScore = currentTimedScore;
-		            };
-		        };
-
-	            update();
-	            shuffledPokemons.shift(1,1);
-            setTimeout(clearAndDraw, 1000);
-	        };
-	};
 };
 
 var gameEnd = function() {
@@ -746,7 +808,7 @@ var forgivingSpelling = function() {
 var wordDiff = function(str1, str2) {
 
     // If the strings are equal, bail
-    if (str1 === str2) {
+    if ( str1.toLowerCase() === str2.toLowerCase() ) {
         return 0;
     }
 
@@ -759,7 +821,7 @@ var wordDiff = function(str1, str2) {
     var numDiffChar = 0;
     var index = 0;
     while (index < str1.length) {
-        if (str1.charAt(index) !== str2.charAt(index)) {
+        if (str1.toLowerCase().charAt(index) !== str2.toLowerCase().charAt(index)) {
             numDiffChar++;
         }
         index++;
