@@ -210,6 +210,8 @@ var removeAllListeners = function() {
     mediumButton.removeEventListener("click", changeMedium);
     hardButton.removeEventListener("click", changeHard);
     startButton.removeEventListener("click", gameDelay);
+    foreverButton.removeEventListener("click", foreverMode);
+    timedButton.removeEventListener("click", timedMode);
 
     easyButton.style.cursor = "default";
     mediumButton.style.cursor = "default";
@@ -309,6 +311,7 @@ var gameInit = function() {
 
 // Delaying gameInit due to wait for JSON data. 3 secs should be fiune
 var gameDelay = function() {
+    removeAllListeners()
     if ( restart == 0 ) {
         addSound("music/theme.mp3");
         if ( gameMode != 0 ){
