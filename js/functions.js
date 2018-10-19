@@ -105,9 +105,9 @@ var counter = document.getElementById("progress");
 // Functions to change difficulty
 var changeEasy = function() {
     difficulty = 1;
-    mediumButton.classList.remove("selected");
-    hardButton.classList.remove("selected");
-    easyButton.classList.add("selected");
+    easyButton.style.backgroundColor = "#f2d468";
+    mediumButton.style.backgroundColor = "transparent";
+    hardButton.style.backgroundColor = "transparent";
     easyButton.style.textDecoration = "line-through";
     mediumButton.style.textDecoration = "line-through";
     hardButton.style.textDecoration = "line-through";
@@ -116,9 +116,9 @@ var changeEasy = function() {
 
 var changeMedium = function() {
     difficulty = 2;
-    hardButton.classList.remove("selected");
-    easyButton.classList.remove("selected");
-    mediumButton.classList.add("selected");
+    easyButton.style.backgroundColor = "transparent";
+    mediumButton.style.backgroundColor = "#f2d468";
+    hardButton.style.backgroundColor = "transparent";
     easyButton.style.textDecoration = "line-through";
     mediumButton.style.textDecoration = "line-through";
     hardButton.style.textDecoration = "line-through";
@@ -128,9 +128,9 @@ var changeMedium = function() {
 
 var changeHard = function() {
     difficulty = 3;
-    easyButton.classList.remove("selected");
-    mediumButton.classList.remove("selected");
-    hardButton.classList.add("selected");
+    easyButton.style.backgroundColor = "transparent";
+    mediumButton.style.backgroundColor = "transparent";
+    hardButton.style.backgroundColor = "#f2d468";
     mediumButton.style.textDecoration = "line-through";
     hardButton.style.textDecoration = "line-through";
     easyButton.style.textDecoration = "line-through";
@@ -140,16 +140,16 @@ var changeHard = function() {
 
 var foreverMode = function() {
     gameMode = 1;
-    timedButton.classList.remove("selected");
-    foreverButton.classList.add("selected");
+    foreverButton.style.backgroundColor = "#f2d468";
+    timedButton.style.backgroundColor = "transparent";
     timedButton.style.textDecoration = 'line-through';
     foreverButton.style.textDecoration = 'none';
 };
 
 var timedMode = function() {
 	gameMode = 2;
-    foreverButton.classList.remove("selected");
-    timedButton.classList.add("selected");
+    foreverButton.style.backgroundColor = "transparent";
+    timedButton.style.backgroundColor = "#f2d468";
     foreverButton.style.textDecoration = 'line-through';
     timedButton.style.textDecoration = 'none';
 }
@@ -244,11 +244,17 @@ var restartGame = function() {
         gameMode = 0;
         difficulty = 0;
         restart = 0;
-        easyButton.style.backgroundColor = "";
-        mediumButton.style.backgroundColor = "";
-        hardButton.style.backgroundColor = "";
-        foreverButton.style.backgroundColor = "";
-        timedButton.style.backgroundColor = "";
+        easyButton.style.backgroundColor = "transparent";
+        mediumButton.style.backgroundColor = "transparent";
+        hardButton.style.backgroundColor = "transparent";
+        foreverButton.style.backgroundColor = "transparent";
+        timedButton.style.backgroundColor = "transparent";
+
+        easyButton.style.textDecoration = "none";
+        mediumButton.style.textDecoration = "none";
+        hardButton.style.textDecoration = "none";
+        foreverButton.style.textDecoration = "none";
+        timedButton.style.textDecoration = "none";
     };
 };
 
@@ -304,8 +310,8 @@ var gameInit = function() {
 // Delaying gameInit due to wait for JSON data. 3 secs should be fiune
 var gameDelay = function() {
     if ( restart == 0 ) {
-        addSound("music/theme-2.mp3");
-        if ( gameMode != 0 && gameMode != 0 ){
+        addSound("music/theme.mp3");
+        if ( gameMode != 0 ){
             setTimeout(gameInit, 4100);
             setTimeout(threeToOne, 1000);
             setTimeout(threeToOne, 2000);
@@ -666,7 +672,7 @@ var nameCheck = function() {
 
     } else {
 
-        if ( difficulty == 2 ) {
+        if ( difficulty != 3 ) {
 
             if ( document.getElementById("name-input").value.toLowerCase() == pokedex[shuffledPokemons[0]].toLowerCase() ) {
                 revealPokemon();
@@ -703,7 +709,16 @@ var nameCheck = function() {
             };
         };
         if ( difficulty == 3 ) {
-            if ( document.getElementById("name-input").value.toLowerCase() == pokedex[shuffledPokemons[0]].toLowerCase() && ( pokemon.pokemon[shuffledPokemons[0] - 1].type[0].toLowerCase().includes(document.getElementById("type-input").value.toLowerCase()) || pokemon.pokemon[shuffledPokemons[0] - 1].type[1].toLowerCase().includes(document.getElementById("type-input").value.toLowerCase()) )) {
+
+            let input1 = document.getElementById("name-input").value.toLowerCase();
+
+            let answer1 = pokedex[shuffledPokemons[0]].toLowerCase();
+
+            let typeInput = document.getElementById('type-input').value.toLowerCase()
+
+            let types = pokemon.pokemon[shuffledPokemons[0]-1].type.map(v => v.toLowerCase());
+
+            if ( input1 == answer1 && types.includes(typeInput) ) {
                 revealPokemon();
     	        if ( gameMode == 1 ) {
     	            currentForeverScore++
@@ -805,7 +820,7 @@ var forgivingSpelling = function() {
 var wordDiff = function(str1, str2) {
 
     // If the strings are equal, bail
-    if ( str1.toLowerCase() === str2.toLowerCase() ) {
+    if ( str1.toLowerCase() == str2.toLowerCase() ) {
         return 0;
     }
 
@@ -818,7 +833,7 @@ var wordDiff = function(str1, str2) {
     var numDiffChar = 0;
     var index = 0;
     while (index < str1.length) {
-        if (str1.toLowerCase().charAt(index) !== str2.toLowerCase().charAt(index)) {
+        if (str1.toLowerCase().charAt(index) != str2.toLowerCase().charAt(index)) {
             numDiffChar++;
         }
         index++;
