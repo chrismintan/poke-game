@@ -10,8 +10,8 @@
 <body>
 
 <!-- Creating the whole table -->
-<div class="container-fluid">
-
+<div class="container-fluid" id='wrapper'>
+<img id='test' src="css/background.png">
 	<!-- Having only one row so that the blocks of text do not stack on top of each other when window is resized -->
 	<div class="row">
 
@@ -21,9 +21,9 @@
 
 			<!-- Difficulty box with 3 settings (easy, medium, hard) -->
 			<h2 class="headers sides">Difficuty</h2>
-				<div class="options" id="easy">Easy</div>
-				<div class="options" id="medium">Medium</div>
-				<div class="options" id="hard">Hard</div>
+				<div class="options" id="easy">Greyscale</div>
+				<div class="options" id="medium">Shadow</div>
+				<div class="options" id="hard">Extreme!</div>
 
             <!-- Creating game mode options (forever, timed) -->
             <h2 class="headers sides">Game Mode</h2>
@@ -33,12 +33,15 @@
             <!-- Creating a Start Game button -->
             <div class="wrap" id="start-button">
                 <h2 class="headers sides" id="start">Start Game</h2>
-                <img class="pokeball" src="sprites/poke-ball.png">
             </div>
             <div id="restart">Restart</div>
 
             <!-- Creating the Hint section of the game -->
             <h2 class="headers sides" id="skip">I don't know,<br>Skip!</h2>
+
+             <h2 class='headers sides' id='spelling'>Forgiving<br>Spelling?</h2>
+
+            <h2 class='headers sides' id='mute'>Mute Sound</h2>
 
 		</div>
 
@@ -94,6 +97,7 @@
     </div>
 
 </div>
+<script src="js/pokedex.js"></script>
 <script src="js/functions.js"></script>
 <!-- <script src="js/script.js"></script> -->
 </body>

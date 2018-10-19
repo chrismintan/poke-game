@@ -1,3 +1,5 @@
+console.log('should not show')
+
 var poke = ["Bulbasaur","Ivysaur","Venusaur","Charmander","Charmeleon","Charizard","Squirtle","Wartortle","Blastoise","Caterpie","Metapod","Butterfree","Weedle","Kakuna","Beedrill","Pidgey","Pidgeotto","Pidgeot","Rattata","Raticate","Spearow","Fearow","Ekans","Arbok","Pikachu","Raichu","Sandshrew","Sandslash","Nidoran","Nidorina","Nidoqueen","Nidoran","Nidorino","Nidoking","Clefairy","Clefable","Vulpix","Ninetales","Jigglypuff","Wigglytuff","Zubat","Golbat","Oddish","Gloom","Vileplume","Paras","Parasect","Venonat","Venomoth","Diglett","Dugtrio","Meowth","Persian","Psyduck","Golduck","Mankey","Primeape","Growlithe","Arcanine","Poliwag","Poliwhirl","Poliwrath","Abra","Kadabra","Alakazam","Machop","Machoke","Machamp","Bellsprout","Weepinbell","Victreebel","Tentacool","Tentacruel","Geodude","Graveler","Golem","Ponyta","Rapidash","Slowpoke","Slowbro","Magnemite","Magneton","Farfetchd","Doduo","Dodrio","Seel","Dewgong","Grimer","Muk","Shellder","Cloyster","Gastly","Haunter","Gengar","Onix","Drowzee","Hypno","Krabby","Kingler","Voltorb","Electrode","Exeggcute","Exeggutor","Cubone","Marowak","Hitmonlee","Hitmonchan","Lickitung","Koffing","Weezing","Rhyhorn","Rhydon","Chansey","Tangela","Kangaskhan","Horsea","Seadra","Goldeen","Seaking","Staryu","Starmie","Mr. Mime","Scyther","Jynx","Electabuzz","Magmar","Pinsir","Tauros","Magikarp","Gyarados","Lapras","Ditto","Eevee","Vaporeon","Jolteon","Flareon","Porygon","Omanyte","Omastar","Kabuto","Kabutops","Aerodactyl","Snorlax","Articuno","Zapdos","Moltres","Dratini","Dragonair","Dragonite","Mewtwo","Mew"];
 var currentPokeNum;
 var pastPokemons = [];
@@ -36,6 +38,8 @@ var currentKeys = [];
 var intervalID;
 var bottom = document.getElementById("blinker1");
 var mid = document.getElementsByClassName("middle")[0];
+var spelling = 0;
+
 
 var addSound = function(src) {
     if ( sound != 1 ) {
@@ -49,8 +53,26 @@ var addSound = function(src) {
         middle.appendChild(backgroundMusic);
         backgroundMusic.play();
         document.getElementById("myMusic").loop = true;
+        document.getElementById('myMusic').muted = false;
+        document.getElementById('mute').style.display = 'table-cell'
     };
 };
+
+
+// Mute function for people who dont want to hear the awesome music
+var mute = function() {
+    if(document.getElementById('myMusic').muted == false) {
+        document.getElementById('myMusic').muted = true;
+        document.getElementById('mute').style.backgroundColor = '#FF4136';
+        document.getElementById('mute').style.textDecoration = 'line-through';
+    } else {
+        document.getElementById('myMusic').muted = false;
+        document.getElementById('mute').style.backgroundColor = 'transparent';
+        document.getElementById('mute').style.textDecoration = 'none';
+    }
+}
+
+document.getElementById('mute').addEventListener('click', mute)
 
 // Generate an array of all the pokemons
 for (var i = 1; i < 152; i++) {
@@ -87,10 +109,10 @@ var changeEasy = function() {
     mediumButton.classList.remove("selected");
     hardButton.classList.remove("selected");
     easyButton.classList.add("selected");
-    easyButton.style.backgroundColor = "#EBEEB2FF";
-    mediumButton.style.backgroundColor = "#EBEEB2FF";
-    hardButton.style.backgroundColor = "#EBEEB2FF";
-    easyButton.style.backgroundColor = "#f2d468";
+    easyButton.style.textDecoration = "line-through";
+    mediumButton.style.textDecoration = "line-through";
+    hardButton.style.textDecoration = "line-through";
+    easyButton.style.textDecoration = "none";
 };
 
 var changeMedium = function() {
@@ -98,11 +120,11 @@ var changeMedium = function() {
     hardButton.classList.remove("selected");
     easyButton.classList.remove("selected");
     mediumButton.classList.add("selected");
-    easyButton.style.backgroundColor = "#EBEEB2FF";
-    mediumButton.style.backgroundColor = "#EBEEB2FF";
-    hardButton.style.backgroundColor = "#EBEEB2FF";
-    mediumButton.style.backgroundColor = "#f2d468";
-    getPokemon();
+    easyButton.style.textDecoration = "line-through";
+    mediumButton.style.textDecoration = "line-through";
+    hardButton.style.textDecoration = "line-through";
+    mediumButton.style.textDecoration = "none";
+    // getPokemon();
 };
 
 var changeHard = function() {
@@ -110,34 +132,34 @@ var changeHard = function() {
     easyButton.classList.remove("selected");
     mediumButton.classList.remove("selected");
     hardButton.classList.add("selected");
-    easyButton.style.backgroundColor = "#EBEEB2FF";
-    mediumButton.style.backgroundColor = "#EBEEB2FF";
-    hardButton.style.backgroundColor = "#EBEEB2FF";
-    hardButton.style.backgroundColor = "#f2d468";
-    getPokemon();
+    mediumButton.style.textDecoration = "line-through";
+    hardButton.style.textDecoration = "line-through";
+    easyButton.style.textDecoration = "line-through";
+    hardButton.style.textDecoration = "none";
+    // getPokemon();
 };
 
 var foreverMode = function() {
     gameMode = 1;
     timedButton.classList.remove("selected");
     foreverButton.classList.add("selected");
-    timedButton.style.backgroundColor = "#EBEEB2FF";
-    foreverButton.style.backgroundColor = "#f2d468";
+    timedButton.style.textDecoration = 'line-through';
+    foreverButton.style.textDecoration = 'none';
 };
 
 var timedMode = function() {
 	gameMode = 2;
     foreverButton.classList.remove("selected");
     timedButton.classList.add("selected");
-    foreverButton.style.backgroundColor = "#EBEEB2FF";
-    timedButton.style.backgroundColor = "#f2d468";
+    foreverButton.style.textDecoration = 'line-through';
+    timedButton.style.textDecoration = 'none';
 }
 
 var skipMode = function() {
     skip = 1;
     skipCounter++
     if ( difficulty == 2 )  {
-        document.getElementById("name-input").value = namesArray[0];
+        document.getElementById("name-input").value = pokedex[shuffledPokemons[0]];
         if ( gameMode == 1 ) {
             currentForeverScore--
         };
@@ -149,8 +171,8 @@ var skipMode = function() {
     };
 
     if ( difficulty == 3 ) {
-        document.getElementById("name-input").value = namesArray[0];
-        document.getElementById("type-input").value = typeArray[0];
+        document.getElementById("name-input").value = pokedex[shuffledPokemons[0]];
+        document.getElementById("type-input").value = pokemon.pokemon[shuffledPokemons[0] - 1].type[0];
         if ( gameMode == 1  ) {
             currentForeverScore--
         };
@@ -223,11 +245,11 @@ var restartGame = function() {
         gameMode = 0;
         difficulty = 0;
         restart = 0;
-        easyButton.style.backgroundColor = "#EBEEB2FF";
-        mediumButton.style.backgroundColor = "#EBEEB2FF";
-        hardButton.style.backgroundColor = "#EBEEB2FF";
-        foreverButton.style.backgroundColor = "#EBEEB2FF";
-        timedButton.style.backgroundColor = "#EBEEB2FF";
+        easyButton.style.backgroundColor = "";
+        mediumButton.style.backgroundColor = "";
+        hardButton.style.backgroundColor = "";
+        foreverButton.style.backgroundColor = "";
+        timedButton.style.backgroundColor = "";
     };
 };
 
@@ -460,7 +482,7 @@ var drawShadow = function() {
 		var canvas = document.getElementById("myCanvas")
 		ctx = canvas.getContext("2d");
 		shownImage = new Image();
-		shownImage.src = imgArray[0];
+		shownImage.src = "sprites/" + shuffledPokemons[0] + ".png";
 		shownImage.setAttribute("crossorigin","Anonymous");
 
 		// onload is used to ensure image has has finished loading
@@ -477,11 +499,11 @@ var drawShadow = function() {
 			ctx.drawImage(shownImage, 0, 0, canvas.width, canvas.height);
 			var baseImage = ctx.getImageData(0, 0, canvas.width, canvas.height);
 			for (var i = 0; i < baseImage.data.length; i+=4 ) {
-	            if( baseImage.data[i+3] >= 100 ) {
-	                baseImage.data[i] = 30;
-	                baseImage.data[i+1] = 30;
-	                baseImage.data[i+2] = 30;
-	                baseImage.data[i+3] = 255;
+	            if( baseImage.data[i] >= 1 || baseImage.data[i+1] >= 1 || baseImage.data[i+2] >= 1)  {
+	                baseImage.data[i] = 0;
+	                baseImage.data[i+1] = 0;
+	                baseImage.data[i+2] = 0;
+	                // baseImage.data[i+3] = 255;
                 };
             };
             ctx.putImageData( baseImage, 0, 0 );
@@ -494,7 +516,7 @@ var drawShadow = function() {
 		ctx = canvas.getContext("2d");
 		shownImage = new Image();
 		shownImage.src = "sprites/" + shuffledPokemons[0] + ".png";
-		// shownImage.setAttribute("crossorigin","Anonymous");
+		shownImage.setAttribute("crossorigin","Anonymous");
 
 		// onload is used to ensure image has has finished loading
 		shownImage.onload = function() {
@@ -508,12 +530,15 @@ var drawShadow = function() {
 
 			ctx.drawImage(shownImage, 0, 0, canvas.width, canvas.height);
 			var baseImage = ctx.getImageData(0, 0, canvas.width, canvas.height);
+
+            // avg used for greyscale
 			for (var i = 0; i < baseImage.data.length; i+=4 ) {
-	            if( baseImage.data[i+3] >= 100 ) {
-	                baseImage.data[i] = 30;
-	                baseImage.data[i+1] = 30;
-	                baseImage.data[i+2] = 30;
-	                baseImage.data[i+3] = 255;
+	            if( baseImage.data[i] >= 1 || baseImage.data[i+1] >= 1 || baseImage.data[i+2] >= 1) {
+                    var avg = (baseImage.data[i] + baseImage.data[i+1] + baseImage.data[i+2])/3
+	                baseImage.data[i] = avg;
+	                baseImage.data[i+1] = avg;
+	                baseImage.data[i+2] = avg;
+	                // baseImage.data[i+3] = 255;
     	        };
     		};
     		ctx.putImageData( baseImage, 0, 0 );
@@ -528,7 +553,7 @@ var revealPokemon = function() {
 		ctx = canvas.getContext("2d");
 		ctx.clearRect(0, 0, canvas.width, canvas.height);
 		shownImage = new Image();
-		shownImage.src = imgArray[0];
+		shownImage.src = "sprites/"+shuffledPokemons[0]+".png";
 
 	    shownImage.onload = function() {
 	    if ( shownImage.width <= 100 ) {
@@ -546,7 +571,7 @@ var revealPokemon = function() {
 		ctx = canvas.getContext("2d");
 		ctx.clearRect(0, 0, canvas.width, canvas.height);
 		shownImage = new Image();
-		shownImage.src = "new-sprites/"+shuffledPokemons[0]+".png";
+		shownImage.src = "sprites/"+shuffledPokemons[0]+".png";
 
 	    shownImage.onload = function() {
 	    if ( shownImage.width <= 100 ) {
@@ -584,7 +609,7 @@ var nameCheck = function() {
 
     if ( difficulty == 2 ) {
 
-        if ( document.getElementById("name-input").value == namesArray[0] ) {
+        if ( document.getElementById("name-input").value.toLowerCase() == pokedex[shuffledPokemons[0]].toLowerCase() ) {
             revealPokemon();
 
             // Add difficulty conditions here
@@ -603,22 +628,23 @@ var nameCheck = function() {
 	        };
 
             update();
+            shuffledPokemons.shift(1,1);
             imgArray.shift(1,1);
             namesArray.shift(1,1);
             typeArray.shift(1,1);
 
             // Make AJAX request in advance once array has less than 4
             // This is to avoid any 'lag'
-            if ( imgArray.length < 4 ) {
-                getPokemon();
-            };
+            // if ( imgArray.length < 4 ) {
+            //     getPokemon();
+            // };
 
             // Timeout delay of 1 second so that user can see the Pokemon before clearing the canvas
             setTimeout(clearAndDraw, 1000);
         };
     };
     if ( difficulty == 3 ) {
-        if ( document.getElementById("name-input").value == namesArray[0] && typeArray[0].includes(document.getElementById("type-input").value)) {
+        if ( document.getElementById("name-input").value.toLowerCase() == pokedex[shuffledPokemons[0]].toLowerCase() && ( pokemon.pokemon[shuffledPokemons[0] - 1].type[0].toLowerCase().includes(document.getElementById("type-input").value.toLowerCase()) || pokemon.pokemon[shuffledPokemons[0] - 1].type[1].toLowerCase().includes(document.getElementById("type-input").value.toLowerCase()) )) {
             revealPokemon();
 	        if ( gameMode == 1 ) {
 	            currentForeverScore++
@@ -634,13 +660,14 @@ var nameCheck = function() {
 	        };
 
             update();
+            shuffledPokemons.shift(1,1);
             imgArray.shift(1,1);
             namesArray.shift(1,1);
             typeArray.shift(1,1);
 
-            if ( imgArray.length < 4 ) {
-                getPokemon();
-            };
+            // if ( imgArray.length < 4 ) {
+            //     getPokemon();
+            // };
             setTimeout(clearAndDraw, 1000);
         };
     };
@@ -702,9 +729,45 @@ var stopTime = function() {
     clearTimeout(timeoutID);
 };
 
+// Forgiving spelling to be implemented
 
+var forgivingSpelling = function() {
+    if( spelling == 0 ) {
+        spelling = 1;
+        document.getElementById('spelling').style.backgroundColor = '#2ECC40';
+        document.getElementById('spelling').style.textDecoration = 'none';
+    } else {
+        spelling = 0;
+        document.getElementById('spelling').style.backgroundColor = 'transparent';
+        document.getElementById('spelling').style.textDecoration = 'line-through';
+    }
+}
 
+var wordDiff = function(str1, str2) {
 
+    // If the strings are equal, bail
+    if (str1 === str2) {
+        return 0;
+    }
+
+    // If the lengths are not equal, there is no point comparing each character.
+    if (str1.length != str2.length) {
+        return false;
+    }
+
+    // Loop here to go through each position and check if both strings are equal.
+    var numDiffChar = 0;
+    var index = 0;
+    while (index < str1.length) {
+        if (str1.charAt(index) !== str2.charAt(index)) {
+            numDiffChar++;
+        }
+        index++;
+    }
+    return numDiffChar;
+};
+
+document.getElementById('spelling').addEventListener('click', forgivingSpelling)
 
 
 setUpListeners();
