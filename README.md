@@ -2,7 +2,7 @@
 [**Who's That Pokémon**](https://chrismintan.github.io/whos-that-pokemon/) is a game developed for a [project assignment](https://github.com/wdi-sg/project-1) at General Assembly's Web Development Immersive (WDI) Course.
 
 ## How to play
-This project is inspired by the popular question-and-answer segment that is featured in numerous episodes of the Pokémon anime. There are three different difficulty settings and two different game modes in this game. The easiest setting is Greyscale which shows Pokémons in the OG Game Boy non colored version. Shadow difficulty, as the name suggests it, shows a shadow of the Pokémon and you would have to input the name. Extreme mode involves having to input both the Pokémon's name and the type. For Pokémons with multiple types, only one type would be required to be inputted.
+This project is inspired by the popular question-and-answer segment that is featured in numerous episodes of the Pokémon anime. There are three different difficulty settings and two different game modes in this game. The easiest setting is Greyscale which shows Pokémons in the OG Game Boy non colored version. Shadow difficulty shows a shadow of the Pokémon and you would have to input the name. Extreme mode involves having to input both the Pokémon's name and the type. For Pokémons with multiple types, only one type would be required to be inputted.
 
 ### Demo
 You can see how the game works below:
