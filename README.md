@@ -2,7 +2,7 @@
 [**Who's That Pokémon**](https://chrismintan.github.io/whos-that-pokemon/) is a game developed for a [project assignment](https://github.com/wdi-sg/project-1) at General Assembly's Web Development Immersive (WDI) Course.
 
 ## How to play
-This project is inspired by the popular question-and-answer segment that is featured in numerous episodes of the Pokémon anime. There are three different difficulty settings and two different game modes in this game. The easiest setting is Greyscale which shows Pokémons in the OG Game Boy non colored version. Shadow difficulty shows a shadow of the Pokémon and you would have to input the name. Extreme mode involves having to input both the Pokémon's name and the type. For Pokémons with multiple types, only one type would be required to be inputted.
+This project is inspired by the popular question-and-answer segment that is featured in numerous episodes of the Pokémon anime. There are three different difficulty settings and two different game modes in this game. The easiest setting is Greyscale which shows Pokémons in the OG Game Boy non colored version. Shadow is the normal version of showing just the silhouette of the Pokémon and the user would have to input the name. Extreme involves having to input both the Pokémon's name and type. For Pokémons with multiple types, only one type would be required to be inputted.
 
 ### Demo
 You can see how the game works below:
@@ -40,7 +40,7 @@ In our case, the Pokémon image only has pixels where the Pokémon is. This allo
 
 ![Sprite transform](https://github.com/chrismintan/whos-that-pokemon/blob/master/assets/sprite-transform.png)
 
-You will see later how this not only improves the visuals by allowing a nice background image to be placed but it also allows us to manipulate the picture to draw a shadow.
+You will see later how this not only improves the visuals by allowing a nice background image to be placed but it also allows us to manipulate the picture to draw a silhouette.
 
 The Pokémon image is first drawn on the Canvas using the following code:
 
@@ -80,10 +80,10 @@ ctx.putImageData( pokemonImage, 0, 0 );
 
 ![Greyscale Demo](https://github.com/chrismintan/whos-that-pokemon/blob/master/assets/greyscale.gif)
 
-Greyscaling the sprite now gives the Pokémons the classic non colored Game Boy OG look! Now lets see how making a shadow is done instead.
+Greyscaling the sprite now gives the Pokémons the classic non colored Game Boy OG look! Now lets see how making a silhouette is done instead.
 
-### Shadow
-For drawing a shadow instead of greyscale, instead of using the average of every pixel's RGB value, we change all the values to 0 as an RGB value of (0, 0, 0) would equate to black.
+### Silhouette
+For drawing a silhouette instead of greyscale, instead of using the average of every pixel's RGB value, we change all the values to 0 as an RGB value of (0, 0, 0) would equate to black.
 
 ```
 for (var i = 0; i < pokemonImage.data.length; i+=4 ) {
@@ -98,7 +98,7 @@ for (var i = 0; i < pokemonImage.data.length; i+=4 ) {
 	  };
 };
 
-// The shadow is then drawn onto the Canvas
+// The silhouette is then drawn onto the Canvas
 ctx.putImageData( pokemonImage, 0, 0 );
 ```
 
