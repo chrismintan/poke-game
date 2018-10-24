@@ -618,7 +618,7 @@ var nameCheck = function() {
             let input = document.getElementById("name-input").value.toLowerCase();
             let answer = pokedex[shuffledPokemons[0]].toLowerCase();
 
-            if ( wordDiff(input, answer) < 3 && wordDiff(input, answer) != false ) {
+            if ( (wordDiff(input, answer) < 3 && wordDiff(input, answer) != false) || input == answer ) {
                 revealPokemon()
                 if ( gameMode == 1 ) {
                     currentForeverScore++
@@ -648,7 +648,7 @@ var nameCheck = function() {
 
             let types = pokemon.pokemon[shuffledPokemons[0]-1].type.map(v => v.toLowerCase());
 
-            if ( wordDiff(input1, answer1) < 3 && wordDiff(input1, answer1) != false && types.includes(typeInput) ) {
+            if ( ( (wordDiff(input1, answer1) < 3 && wordDiff(input1, answer1) != false) || input1 == answer1 ) && types.includes(typeInput) ) {
 
                 revealPokemon()
                 if ( gameMode == 1 ) {
