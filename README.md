@@ -23,29 +23,29 @@ An AJAX request is made to [PokéAPI](https://pokeapi.co/) which is a website wh
 ```
 var responseHandler = function() {
 
-	// As the data is in JSON format, I would first need to parse it
-	let results = JSON.parse(this.responseText);
+  // As the data is in JSON format, I would first need to parse it
+  let results = JSON.parse(this.responseText);
 
-	// The Pokémon's name, type, and image link can then be accessed through their specific
-	// end points. I pushed the results into an Array of names, types, and image urls
+  // The Pokémon's name, type, and image link can then be accessed through their specific
+  // end points. I pushed the results into an Array of names, types, and image urls
 
-	// For the Pokémon's name
-	namesArray.push(results.name)
+  // For the Pokémon's name
+  namesArray.push(results.name)
 
-	// For the Pokémon's type(s)
-	typeArray.push(results.types)
+  // For the Pokémon's type(s)
+  typeArray.push(results.types)
 
-	// For the Pokémon's image
-	imgArray.push(results.sprites.front_default)
+  // For the Pokémon's image
+  imgArray.push(results.sprites.front_default)
 
 };
 
 // Function for sending a 'GET' request to the PokéAPI for a particular Pokémon
 var getPokemon = function(Pokemon_ID) {
-		var request = new XMLHttpRequest();
-				request.addEventListener("load", responseHandler);
-				request.open("GET", `https://pokeapi.co/api/v2/pokemon/${Pokemon_ID}/`
-				request.send();
+  var request = new XMLHttpRequest();
+    request.addEventListener("load", responseHandler);
+    request.open("GET", `https://pokeapi.co/api/v2/pokemon/${Pokemon_ID}/`
+    request.send();
 };
 ```
 
@@ -68,12 +68,12 @@ The Pokémon image is first drawn on the Canvas using the following code:
 
 ```
 var canvas = document.getElementById("myCanvas")
-		ctx = canvas.getContext("2d")
-		pokemonImage = new Image()
-		pokemonImage.src = `sprites/${okémon ID}.png`
+  ctx = canvas.getContext("2d")
+  pokemonImage = new Image()
+  pokemonImage.src = `sprites/${okémon ID}.png`
 
-		// This function draws the sprite onto the Canvas
-		ctx.drawImage(pokemonImage, 0, 0, canvas.width, canvas.height)
+  // This function draws the sprite onto the Canvas
+  ctx.drawImage(pokemonImage, 0, 0, canvas.width, canvas.height)
 ```
 
 Now that the Pokémon sprite is on the Canvas, we can now manipulate the pixels!
@@ -143,30 +143,30 @@ To combat this issue, a 'forgiving spelling' option was created. Instead of chec
 ```
 var wordDiff = function(str1, str2) {
 
-		// If the strings are equal, no point running the function thus return 0
-		if ( str1.toLowerCase() == str2.toLowerCase() ) {
-				return 0;
-		}
+  // If the strings are equal, no point running the function thus return 0
+  if ( str1.toLowerCase() == str2.toLowerCase() ) {
+    return 0;
+  }
 
-		// If the lengths are not equal, there is no point comparing each character.
-		if (str1.length != str2.length) {
-				return false;
-		}
+  // If the lengths are not equal, there is no point comparing each character.
+  if (str1.length != str2.length) {
+    return false;
+  }
 
-		// If the two strings inputted are the same length and do not equate to each, this function loops
-		// through each letter and checks if both characters are equal. If it is different, it adds 1 to
-		// the variable numDiffChar and when it reaches the end of the word it returns numDiffChar which is
-		// the number of different letters between the two strings which were passed into the function
+  // If the two strings inputted are the same length and do not equate to each, this function loops
+  // through each letter and checks if both characters are equal. If it is different, it adds 1 to
+  // the variable numDiffChar and when it reaches the end of the word it returns numDiffChar which is
+  // the number of different letters between the two strings which were passed into the function
 
-		var numDiffChar = 0;
-		var index = 0;
-		while (index < str1.length) {
-				if (str1.toLowerCase().charAt(index) != str2.toLowerCase().charAt(index)) {
-						numDiffChar++;
-				}
-				index++;
-		}
-		return numDiffChar;
+  var numDiffChar = 0;
+  var index = 0;
+  while (index < str1.length) {
+    if (str1.toLowerCase().charAt(index) != str2.toLowerCase().charAt(index)) {
+      numDiffChar++;
+    }
+    index++;
+  }
+  return numDiffChar;
 };
 ```
 
@@ -178,7 +178,7 @@ With forgiving spelling, instead of the winning condition being the user's input
 // the word length must be the same before winning condition is met
 
 if ( wordDiff(input, answer) < 3 && wordDiff(input, answer) != false ) {
-		revealPokemon()
+  revealPokemon()
 }
 ```
 
@@ -199,11 +199,11 @@ For people who do not like the awesome nostalgic good vibes Pokémon theme song,
 ```
 // Mute function for people who dont want to hear the awesome music
 var mute = function() {
-		if(document.getElementById('myMusic').muted == false) {
-				document.getElementById('myMusic').muted = true;
-		} else {
-				document.getElementById('myMusic').muted = false;
-		}
+  if(document.getElementById('myMusic').muted == false) {
+    document.getElementById('myMusic').muted = true;
+  } else {
+    document.getElementById('myMusic').muted = false;
+  }
 }
 document.getElementById('mute').addEventListener('click', mute)
 ```
