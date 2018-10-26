@@ -43,9 +43,9 @@ var responseHandler = function() {
 // Function for sending a 'GET' request to the PokéAPI for a particular Pokémon
 var getPokemon = function(Pokemon_ID) {
 		var request = new XMLHttpRequest();
-		    request.addEventListener("load", responseHandler);
-		   	request.open("GET", `https://pokeapi.co/api/v2/pokemon/${Pokemon_ID}/`
-		   	request.send();
+				request.addEventListener("load", responseHandler);
+				request.open("GET", `https://pokeapi.co/api/v2/pokemon/${Pokemon_ID}/`
+				request.send();
 };
 ```
 
@@ -85,18 +85,18 @@ The first difficulty setting is Greyscale. This turns the colored Pokémon image
 for (var i = 0; i < pokemonImage.data.length; i+=4 ) {
 		// This function only picks the pixels which have color. Colored pixels would be pixels 
 		// which have a Red / Green / Blue value of at least one
-	  if( pokemonImage.data[i] >= 1 || pokemonImage.data[i+1] >= 1 || pokemonImage.data[i+2] >= 1) {
+		if( pokemonImage.data[i] >= 1 || pokemonImage.data[i+1] >= 1 || pokemonImage.data[i+2] >= 1) {
 
 				// The RGB values are totaled up and averaged
 				var avg = (pokemonImage.data[i] + pokemonImage.data[i+1] + pokemonImage.data[i+2])/3
-				pokemonImage.data[i] = avg;		// Corresponds to the Red index
-				pokemonImage.data[i+1] = avg;	// Corresponds to the Green index
-				pokemonImage.data[i+2] = avg;	// Corresponds to the Blue index
+				pokemonImage.data[i] = avg;   // Corresponds to the Red index
+				pokemonImage.data[i+1] = avg; // Corresponds to the Green index
+				pokemonImage.data[i+2] = avg; // Corresponds to the Blue index
 
 				// Together, these 3 values make up the RGB color value of each individual pixel
 				// Making the values of their RGB to be the average turns the colored image into a
 				// greyscale picture!
-	  };
+		};
 };
 
 // The greyscale image is then drawn onto the Canvas
@@ -114,14 +114,14 @@ Shadow difficulty involves drawing a silhouette instead of greyscale. For this, 
 for (var i = 0; i < pokemonImage.data.length; i+=4 ) {
 		// This function only picks the pixels which have color. Colored pixels would be pixels
 		// which have a Red / Green / Blue value of at least one
-	  if( pokemonImage.data[i] >= 1 || pokemonImage.data[i+1] >= 1 || pokemonImage.data[i+2] >= 1) {
+		if( pokemonImage.data[i] >= 1 || pokemonImage.data[i+1] >= 1 || pokemonImage.data[i+2] >= 1) {
 
 				// The RGB values are then made to equate to 0 to give rgb(0, 0, 0) for every pixel
-				pokemonImage.data[i] = 0;		// Corresponds to the Red index
-				pokemonImage.data[i+1] = 0;	// Corresponds to the Green index
-				pokemonImage.data[i+2] = 0;	// Corresponds to the Blue index
+				pokemonImage.data[i] = 0;   // Corresponds to the Red index
+				pokemonImage.data[i+1] = 0; // Corresponds to the Green index
+				pokemonImage.data[i+2] = 0; // Corresponds to the Blue index
 
-	  };
+		};
 };
 
 // The silhouette is then drawn onto the Canvas
@@ -144,30 +144,30 @@ To combat this issue, a 'forgiving spelling' option was created. Instead of chec
 ```
 var wordDiff = function(str1, str2) {
 
-    // If the strings are equal, no point running the function thus return 0
-    if ( str1.toLowerCase() == str2.toLowerCase() ) {
-        return 0;
-    }
+		// If the strings are equal, no point running the function thus return 0
+		if ( str1.toLowerCase() == str2.toLowerCase() ) {
+				return 0;
+		}
 
-    // If the lengths are not equal, there is no point comparing each character.
-    if (str1.length != str2.length) {
-        return false;
-    }
+		// If the lengths are not equal, there is no point comparing each character.
+		if (str1.length != str2.length) {
+				return false;
+		}
 
-    // If the two strings inputted are the same length and do not equate to each, this function loops
-    // through each letter and checks if both characters are equal. If it is different, it adds 1 to
-    // the variable numDiffChar and when it reaches the end of the word it returns numDiffChar which is
-    // the number of different letters between the two strings which were passed into the function
+		// If the two strings inputted are the same length and do not equate to each, this function loops
+		// through each letter and checks if both characters are equal. If it is different, it adds 1 to
+		// the variable numDiffChar and when it reaches the end of the word it returns numDiffChar which is
+		// the number of different letters between the two strings which were passed into the function
 
-    var numDiffChar = 0;
-    var index = 0;
-    while (index < str1.length) {
-        if (str1.toLowerCase().charAt(index) != str2.toLowerCase().charAt(index)) {
-            numDiffChar++;
-        }
-        index++;
-    }
-    return numDiffChar;
+		var numDiffChar = 0;
+		var index = 0;
+		while (index < str1.length) {
+				if (str1.toLowerCase().charAt(index) != str2.toLowerCase().charAt(index)) {
+						numDiffChar++;
+				}
+				index++;
+		}
+		return numDiffChar;
 };
 ```
 
@@ -179,7 +179,7 @@ With forgiving spelling, instead of the winning condition being the user's input
 // the word length must be the same before winning condition is met
 
 if ( wordDiff(input, answer) < 3 && wordDiff(input, answer) != false ) {
-    revealPokemon()
+		revealPokemon()
 }
 ```
 
@@ -200,11 +200,11 @@ For people who do not like the awesome nostalgic good vibes Pokémon theme song,
 ```
 // Mute function for people who dont want to hear the awesome music
 var mute = function() {
-    if(document.getElementById('myMusic').muted == false) {
-        document.getElementById('myMusic').muted = true;
-    } else {
-        document.getElementById('myMusic').muted = false;
-    }
+		if(document.getElementById('myMusic').muted == false) {
+				document.getElementById('myMusic').muted = true;
+		} else {
+				document.getElementById('myMusic').muted = false;
+		}
 }
 document.getElementById('mute').addEventListener('click', mute)
 ```
