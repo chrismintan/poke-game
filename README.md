@@ -83,19 +83,19 @@ The first difficulty setting is Greyscale. This turns the colored Pokémon image
 
 ```
 for (var i = 0; i < pokemonImage.data.length; i+=4 ) {
-		// This function only picks the pixels which have color. Colored pixels would be pixels 
-		// which have a Red / Green / Blue value of at least one
-		if( pokemonImage.data[i] >= 1 || pokemonImage.data[i+1] >= 1 || pokemonImage.data[i+2] >= 1) {
+  // This function only picks the pixels which have color. Colored pixels would be pixels 
+  // which have a Red / Green / Blue value of at least one
+  if( pokemonImage.data[i] >= 1 || pokemonImage.data[i+1] >= 1 || pokemonImage.data[i+2] >= 1) {
 
-				// The RGB values are totaled up and averaged
-				var avg = (pokemonImage.data[i] + pokemonImage.data[i+1] + pokemonImage.data[i+2])/3
-				pokemonImage.data[i] = avg;   // Corresponds to the Red index
-				pokemonImage.data[i+1] = avg; // Corresponds to the Green index
-				pokemonImage.data[i+2] = avg; // Corresponds to the Blue index
+    // The RGB values are totaled up and averaged
+    var avg = (pokemonImage.data[i] + pokemonImage.data[i+1] + pokemonImage.data[i+2])/3
+    pokemonImage.data[i] = avg;   // Corresponds to the Red index
+    pokemonImage.data[i+1] = avg; // Corresponds to the Green index
+    pokemonImage.data[i+2] = avg; // Corresponds to the Blue index
 
-				// Together, these 3 values make up the RGB color value of each individual pixel
-				// Making the values of their RGB to be the average turns the colored image into a
-				// greyscale picture!
+    // Together, these 3 values make up the RGB color value of each individual pixel
+    // Making the values of their RGB to be the average turns the colored image into a
+    // greyscale picture!
 		};
 };
 
