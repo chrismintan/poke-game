@@ -120,7 +120,6 @@ for (var i = 0; i < pokemonImage.data.length; i+=4 ) {
 				pokemonImage.data[i] = 0;   // Corresponds to the Red index
 				pokemonImage.data[i+1] = 0; // Corresponds to the Green index
 				pokemonImage.data[i+2] = 0; // Corresponds to the Blue index
-
 		};
 };
 
