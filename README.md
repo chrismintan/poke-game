@@ -26,7 +26,8 @@ var responseHandler = function() {
 		// As the data is in JSON format, I would first need to parse it
 		let results = JSON.parse(this.responseText);
 
-		// The Pokémon's name, type, and image link can then be accessed through their specific end points. I pushed the results into an Array of names, types, and image urls
+		// The Pokémon's name, type, and image link can then be accessed through their specific
+		// end points. I pushed the results into an Array of names, types, and image urls
 
 		// For the Pokémon's name
 		namesArray.push(results.name)
@@ -82,16 +83,19 @@ The first difficulty setting is Greyscale. This turns the colored Pokémon image
 
 ```
 for (var i = 0; i < pokemonImage.data.length; i+=4 ) {
-		// This function only picks the pixels which have color. Colored pixels would be pixels which have a Red / Green / Blue value of at least one
+		// This function only picks the pixels which have color. Colored pixels would be pixels 
+		// which have a Red / Green / Blue value of at least one
 	  if( pokemonImage.data[i] >= 1 || pokemonImage.data[i+1] >= 1 || pokemonImage.data[i+2] >= 1) {
 
-	  		// The RGB values are totaled up and averaged
+				// The RGB values are totaled up and averaged
 				var avg = (pokemonImage.data[i] + pokemonImage.data[i+1] + pokemonImage.data[i+2])/3
-	      pokemonImage.data[i] = avg;		// Corresponds to the Red index
-	      pokemonImage.data[i+1] = avg;	// Corresponds to the Green index
-	      pokemonImage.data[i+2] = avg;	// Corresponds to the Blue index
+				pokemonImage.data[i] = avg;		// Corresponds to the Red index
+				pokemonImage.data[i+1] = avg;	// Corresponds to the Green index
+				pokemonImage.data[i+2] = avg;	// Corresponds to the Blue index
 
-	      // Together, these 3 values make up the RGB color value of each individual pixel. Making the values of their RGB to be the average turns the colored image into a greyscale picture!
+				// Together, these 3 values make up the RGB color value of each individual pixel
+				// Making the values of their RGB to be the average turns the colored image into a
+				// greyscale picture!
 	  };
 };
 
@@ -108,13 +112,14 @@ Shadow difficulty involves drawing a silhouette instead of greyscale. For this, 
 
 ```
 for (var i = 0; i < pokemonImage.data.length; i+=4 ) {
-		// This function only picks the pixels which have color. Colored pixels would be pixels which have a Red / Green / Blue value of at least one
+		// This function only picks the pixels which have color. Colored pixels would be pixels
+		// which have a Red / Green / Blue value of at least one
 	  if( pokemonImage.data[i] >= 1 || pokemonImage.data[i+1] >= 1 || pokemonImage.data[i+2] >= 1) {
 
-	  		// The RGB values are then made to equate to 0 to give rgb(0, 0, 0) for every pixel
-	      pokemonImage.data[i] = 0;		// Corresponds to the Red index
-	      pokemonImage.data[i+1] = 0;	// Corresponds to the Green index
-	      pokemonImage.data[i+2] = 0;	// Corresponds to the Blue index
+				// The RGB values are then made to equate to 0 to give rgb(0, 0, 0) for every pixel
+				pokemonImage.data[i] = 0;		// Corresponds to the Red index
+				pokemonImage.data[i+1] = 0;	// Corresponds to the Green index
+				pokemonImage.data[i+2] = 0;	// Corresponds to the Blue index
 
 	  };
 };
@@ -149,7 +154,10 @@ var wordDiff = function(str1, str2) {
         return false;
     }
 
-    // If the two strings inputted are the same length and do not equate to each, this function loops through each letter and checks if both characters are equal. If it is different, it adds 1 to the variable numDiffChar and when it reaches the end of the word it returns numDiffChar which is the number of different letters between the two strings which were passed into the function
+    // If the two strings inputted are the same length and do not equate to each, this function loops
+    // through each letter and checks if both characters are equal. If it is different, it adds 1 to
+    // the variable numDiffChar and when it reaches the end of the word it returns numDiffChar which is
+    // the number of different letters between the two strings which were passed into the function
 
     var numDiffChar = 0;
     var index = 0;
@@ -166,7 +174,9 @@ var wordDiff = function(str1, str2) {
 With forgiving spelling, instead of the winning condition being the user's input being exactly the same as the correct answer, the winning condition is set to be if the number of different characters are less than 3. The code can be seen below:
 
 ```
-// Using the wordDiff function we are able to find out the number of different characters between the user's input and the correct answer. An additional conditional of ( wordDiff != false ) is added to ensure that the word length must be the same before winning condition is met
+// Using the wordDiff function we are able to find out the number of different characters between the user's
+// input and the correct answer. An additional conditional of ( wordDiff != false ) is added to ensure that
+// the word length must be the same before winning condition is met
 
 if ( wordDiff(input, answer) < 3 && wordDiff(input, answer) != false ) {
     revealPokemon()
