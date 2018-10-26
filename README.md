@@ -23,20 +23,20 @@ An AJAX request is made to [PokéAPI](https://pokeapi.co/) which is a website wh
 ```
 var responseHandler = function() {
 
-		// As the data is in JSON format, I would first need to parse it
-		let results = JSON.parse(this.responseText);
+	// As the data is in JSON format, I would first need to parse it
+	let results = JSON.parse(this.responseText);
 
-		// The Pokémon's name, type, and image link can then be accessed through their specific
-		// end points. I pushed the results into an Array of names, types, and image urls
+	// The Pokémon's name, type, and image link can then be accessed through their specific
+	// end points. I pushed the results into an Array of names, types, and image urls
 
-		// For the Pokémon's name
-		namesArray.push(results.name)
+	// For the Pokémon's name
+	namesArray.push(results.name)
 
-		// For the Pokémon's type(s)
-		typeArray.push(results.types)
+	// For the Pokémon's type(s)
+	typeArray.push(results.types)
 
-		// For the Pokémon's image
-		imgArray.push(results.sprites.front_default)
+	// For the Pokémon's image
+	imgArray.push(results.sprites.front_default)
 
 };
 
